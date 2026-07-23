@@ -38,6 +38,10 @@
           <span class="brand-mark" aria-hidden="true">K</span>
           <span>Para Karol</span>
         </a>
+        <button id="mobile-back" class="mobile-back" type="button" hidden>
+          <span aria-hidden="true">←</span>
+          <span id="mobile-back-label">Volver al menú</span>
+        </button>
         <div class="nav-links">
           <a href="#turnos">Turnos</a>
           <a href="#papelitos">Papelitos</a>
@@ -55,7 +59,7 @@
           <h1 id="hero-title"></h1>
           <p id="hero-message" class="hero-message"></p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#turnos">Abrir tu regalito</a>
+            <a id="open-gift" class="button button-primary" href="#turnos">Abrir tu regalito</a>
             <button id="confetti-again" class="button button-quiet" type="button">
               Otro poquito de festejo
             </button>
@@ -76,6 +80,48 @@
             <span>acá</span><i></i><span>allá</span>
           </div>
           <p class="keepsake-signoff">con amor, paciencia y supervisión de Lima</p>
+        </div>
+      </section>
+
+      <section id="menu-regalo" class="gift-menu" aria-labelledby="gift-menu-heading">
+        <div class="gift-menu-inner">
+          <div class="gift-menu-heading">
+            <p class="eyebrow">Elegí qué necesitás hoy</p>
+            <h2 id="gift-menu-heading">Tu regalito, por partes</h2>
+            <p>Entrá a una sección. Cuando termines, el botón de arriba siempre te trae de vuelta.</p>
+          </div>
+          <nav class="gift-menu-grid" aria-label="Menú del regalo">
+            <a class="gift-menu-card" href="#turnos">
+              <span>01</span>
+              <strong>Mis turnos</strong>
+              <small>Organizar días y horarios</small>
+            </a>
+            <a class="gift-menu-card" href="#papelitos">
+              <span>02</span>
+              <strong>Un papelito</strong>
+              <small>Un poquito de amor de casa</small>
+            </a>
+            <a class="gift-menu-card" href="#calma">
+              <span>03</span>
+              <strong>Necesito calma</strong>
+              <small>Respirar y soltar el turno</small>
+            </a>
+            <a class="gift-menu-card" href="#meta">
+              <span>04</span>
+              <strong>Nuestra meta</strong>
+              <small>Sumar para algo lindo</small>
+            </a>
+            <a class="gift-menu-card" href="#lima">
+              <span>05</span>
+              <strong>Quiero ver a Lima</strong>
+              <small>Noticias urgentes desde casa</small>
+            </a>
+            <a class="gift-menu-card" href="#cierre">
+              <span>06</span>
+              <strong>El mensaje final</strong>
+              <small>Una última cosita para vos</small>
+            </a>
+          </nav>
         </div>
       </section>
 

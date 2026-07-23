@@ -47,6 +47,84 @@
   $("#closing-date").textContent = content.closing.date;
   $("#closing-date").dateTime = "2026-07-22";
 
+  // Navegación tipo app en celular: una pantalla a la vez.
+  const mobileViewport = window.matchMedia("(max-width: 759px)");
+  const mobileViews = $$("#contenido > section");
+  const mobileViewIds = new Set(mobileViews.map((view) => view.id));
+  const mobileBack = $("#mobile-back");
+  const mobileBackLabel = $("#mobile-back-label");
+  let currentMobileView = "inicio";
+
+  function viewFromHash() {
+    const requested = location.hash.replace("#", "");
+    return mobileViewIds.has(requested) ? requested : currentMobileView || "inicio";
+  }
+
+  function renderMobileView(viewId = viewFromHash()) {
+    if (!mobileViewport.matches) {
+      document.body.classList.remove("mobile-view-mode");
+      mobileViews.forEach((view) => {
+        view.classList.remove("is-active-view");
+        view.removeAttribute("aria-hidden");
+      });
+      mobileBack.hidden = true;
+      return;
+    }
+
+    const nextView = mobileViewIds.has(viewId) ? viewId : "inicio";
+    currentMobileView = nextView;
+    document.body.classList.add("mobile-view-mode");
+    mobileViews.forEach((view) => {
+      const isActive = view.id === nextView;
+      view.classList.toggle("is-active-view", isActive);
+      view.setAttribute("aria-hidden", String(!isActive));
+      if (isActive) view.scrollTop = 0;
+    });
+
+    mobileBack.hidden = nextView === "inicio";
+    mobileBackLabel.textContent = nextView === "menu-regalo" ? "Volver al inicio" : "Volver al menú";
+  }
+
+  function goToMobileView(viewId, replace = false) {
+    const nextHash = `#${viewId}`;
+    if (replace) history.replaceState({ viewId }, "", nextHash);
+    else history.pushState({ viewId }, "", nextHash);
+    renderMobileView(viewId);
+  }
+
+  $("#open-gift").addEventListener("click", (event) => {
+    if (!mobileViewport.matches) return;
+    event.preventDefault();
+    goToMobileView("menu-regalo");
+  });
+
+  $$(".gift-menu-card").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (!mobileViewport.matches) return;
+      event.preventDefault();
+      goToMobileView(link.hash.replace("#", ""));
+    });
+  });
+
+  $(".brand").addEventListener("click", (event) => {
+    if (!mobileViewport.matches) return;
+    event.preventDefault();
+    goToMobileView("inicio");
+  });
+
+  mobileBack.addEventListener("click", () => {
+    goToMobileView(currentMobileView === "menu-regalo" ? "inicio" : "menu-regalo");
+  });
+
+  window.addEventListener("hashchange", () => renderMobileView(viewFromHash()));
+  window.addEventListener("popstate", () => renderMobileView(viewFromHash()));
+  if (typeof mobileViewport.addEventListener === "function") {
+    mobileViewport.addEventListener("change", () => renderMobileView(viewFromHash()));
+  } else {
+    mobileViewport.addListener(() => renderMobileView(viewFromHash()));
+  }
+  renderMobileView(location.hash ? viewFromHash() : "inicio");
+
   // Apariciones suaves al hacer scroll
   const revealItems = $$(".reveal");
   if (reducedMotion || !("IntersectionObserver" in window)) {
