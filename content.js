@@ -60,11 +60,14 @@ window.KAROL_CONTENT = {
       kicker: "Abrí cuando necesites a alguien indiscutiblemente de tu lado",
       title: "Acá está tu equipo",
       body: [
-        "Vos estuviste para mí de formas grandes y de formas que parecían chiquitas: preguntando, buscando una solución, explicando algo paso a paso y apareciendo justo cuando hacía falta. Nada de eso pasó desapercibido.",
-        "Así que hoy no tenés que defender tu cansancio, justificar que algo te dolió ni explicar por qué no te da la batería. Yo te creo. Te banco. Y si el problema necesita que lo insultemos un rato antes de resolverlo, también manejo ese departamento.",
-        "No hace falta que contestes lindo ni rápido. Este mensaje no trae tarea; trae compañía."
+        "Vos me bancaste desde que yo era muy chica. Tenía diez años y, de una forma bastante literal, me adoptaste como parte de tu vida. Me cuidaste, me enseñaste cosas, me escuchaste y apareciste un montón de veces cuando yo todavía ni siquiera sabía cómo pedir ayuda.",
+        "Estuviste para mí de formas grandes y de formas que quizás parecían chiquitas: preguntando cómo estaba, buscando una solución, explicándome algo paso a paso, defendiéndome, dándome un lugar y haciéndome sentir que siempre tenía a alguien de mi lado. Capaz no te lo dije suficiente, pero nada de eso pasó desapercibido. Gran parte de la persona que soy creció sabiendo que te tenía a vos.",
+        "Así que quiero que sepas que esto también va para el otro lado. No porque te deba algo ni porque haya que llevar la cuenta, sino porque sos mi hermana y te quiero. Yo también quiero ser para vos esa persona a la que podés llegar sin tener que ordenar primero lo que sentís.",
+        "Conmigo no tenés que defender tu cansancio, justificar que algo te dolió ni fingir que estás mejor de lo que estás. Podés venir enojada, triste, confundida, cansada o sin saber qué necesitás. Yo te voy a creer, te voy a escuchar y te voy a bancar. Y si primero hay que insultar al problema durante media hora antes de pensar qué hacer, también manejo ese departamento.",
+        "No puedo prometerte tener siempre la solución correcta, pero sí puedo prometerte que no vas a tener que pasar las cosas sola mientras yo esté acá. Aunque estemos lejos, aunque no contestemos enseguida o aunque ninguna de las dos sepa muy bien qué decir.",
+        "Vos me diste un lugar seguro cuando yo era chica. Ojalá yo pueda devolverte, aunque sea un poco, esa misma sensación cada vez que la necesites."
       ],
-      signature: "Contrato vitalicio de hermanas. Sin letra chica."
+      signature: "Te quiero un montón montonazo. Contrato vitalicio de hermanas, sin letra chica."
     },
     {
       id: "noticia-linda",
