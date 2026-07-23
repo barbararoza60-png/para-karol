@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7efe4" />
+    <meta
+      name="description"
+      content="Un regalo de cumpleaños para Karol: turnos, papelitos, calma, metas y noticias de Lima."
+    />
+    <title>Para Karol · Un abrazo desde casa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./content.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <div class="sky-motif" aria-hidden="true">
+      <span class="floating-bird bird-one"><i></i></span>
+      <span class="floating-bird bird-two"><i></i></span>
+      <span class="floating-bird bird-three"><i></i></span>
+      <span class="floating-feather feather-one"></span>
+      <span class="floating-feather feather-two"></span>
+    </div>
+
+    <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Secciones del regalo">
+        <a class="brand" href="#inicio" aria-label="Volver al inicio">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <span>Para Karol</span>
+        </a>
+        <div class="nav-links">
+          <a href="#turnos">Turnos</a>
+          <a href="#papelitos">Papelitos</a>
+          <a href="#calma">Calma</a>
+          <a href="#meta">Nuestra meta</a>
+          <a href="#lima">Lima</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <section id="inicio" class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p id="hero-eyebrow" class="eyebrow"></p>
+          <h1 id="hero-title"></h1>
+          <p id="hero-message" class="hero-message"></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#turnos">Abrir tu regalito</a>
+            <button id="confetti-again" class="button button-quiet" type="button">
+              Otro poquito de festejo
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-keepsake reveal" aria-label="Un abrazo de casa a la distancia">
+          <span class="tape tape-left" aria-hidden="true"></span>
+          <span class="tape tape-right" aria-hidden="true"></span>
+          <div class="hero-bird" aria-hidden="true">
+            <span class="hero-bird-wing"></span>
+            <span class="hero-bird-eye"></span>
+            <span class="hero-bird-beak"></span>
+          </div>
+          <p class="keepsake-kicker">de casa hasta vos</p>
+          <p id="hero-keepsake-text" class="keepsake-text"></p>
+          <div class="distance-line" aria-hidden="true">
+            <span>acá</span><i></i><span>allá</span>
+          </div>
+          <p class="keepsake-signoff">con amor, paciencia y supervisión de Lima</p>
+        </div>
+      </section>
+
+      <section id="turnos" class="section section-shell" aria-labelledby="calendar-heading">
+        <div class="section-heading reveal">
+          <p class="eyebrow">01 · Para ordenar el quilombo</p>
+          <h2 id="calendar-heading">Tus días, a tu manera</h2>
+          <p>
+            Tocá un día, elegí una etiqueta y, si hace falta, dejate una notita. Queda guardado
+            solamente en este dispositivo.
+          </p>
+        </div>
+
+        <div class="calendar-card reveal">
+          <div class="calendar-toolbar">
+            <button id="calendar-prev" class="icon-button" type="button" aria-label="Mes anterior">
+              <span aria-hidden="true">←</span>
+            </button>
+            <h3 id="calendar-month" aria-live="polite"></h3>
+            <button id="calendar-next" class="icon-button" type="button" aria-label="Mes siguiente">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <div class="calendar-weekdays" aria-hidden="true">
+            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span
+            ><span>Sáb</span><span>Dom</span>
+          </div>
+          <div id="calendar-grid" class="calendar-grid" role="grid"></div>
+          <div id="calendar-legend" class="calendar-legend" aria-label="Etiquetas disponibles"></div>
+        </div>
+      </section>
+
+      <section id="papelitos" class="section section-shell paper-section" aria-labelledby="jar-heading">
+        <div class="section-heading reveal">
+          <p class="eyebrow">02 · Para los días medio torcidos</p>
+          <h2 id="jar-heading">Un frasco lleno de “che, te quiero”</h2>
+          <p>Hay papelitos sinceros, algunos tiernos y otros con el rigor periodístico de Lima.</p>
+        </div>
+
+        <div class="jar-layout reveal">
+          <div id="note-jar" class="note-jar" aria-hidden="true">
+            <div class="jar-lid"></div>
+            <div class="jar-glass">
+              <span class="paper-bit bit-one"></span>
+              <span class="paper-bit bit-two"></span>
+              <span class="paper-bit bit-three"></span>
+              <span class="paper-bit bit-four"></span>
+              <span class="paper-bit bit-five"></span>
+              <span class="jar-label">para<br />Karol</span>
+            </div>
+          </div>
+
+          <div class="paper-note-wrap">
+            <article id="paper-note" class="paper-note" aria-live="polite">
+              <span class="paper-heart" aria-hidden="true">♥</span>
+              <p id="paper-note-text">Sacá uno. Prometo que no hay ninguno que diga “seguí laburando”.</p>
+            </article>
+            <button id="draw-note" class="button button-primary" type="button">
+              Sacar un papelito
+            </button>
+            <p id="paper-note-count" class="microcopy"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="calma" class="section section-shell calm-section" aria-labelledby="calm-heading">
+        <div class="section-heading reveal">
+          <p class="eyebrow">03 · Para después de un turno eterno</p>
+          <h2 id="calm-heading">Bajemos un cambio juntas</h2>
+          <p>No arregla el mundo, pero son unos minutos en los que nadie te pide nada.</p>
+        </div>
+
+        <div class="calm-grid">
+          <div id="breathing-card" class="breathing-card reveal" data-phase="rest">
+            <div class="breathing-copy">
+              <span class="small-label">Respiración 4 · 7 · 8</span>
+              <h3 id="breath-phase">Lista cuando vos estés lista</h3>
+              <p id="breath-instruction">Inhalá 4, sostené 7, exhalá 8.</p>
+            </div>
+            <div class="breathing-orbit" aria-hidden="true">
+              <span class="orbit-dot"></span>
+              <div id="breathing-circle" class="breathing-circle">
+                <span id="breath-count">·</span>
+              </div>
+            </div>
+            <button id="breath-toggle" class="button button-light" type="button">
+              Empezar a respirar
+            </button>
+            <p id="breath-cycles" class="microcopy" aria-live="polite">Ciclos completos: 0</p>
+          </div>
+
+          <div class="affirmation-card reveal">
+            <span class="small-label">Un recordatorio sin frase de taza</span>
+            <blockquote id="affirmation-text" aria-live="polite"></blockquote>
+            <button id="new-affirmation" class="text-button" type="button">
+              Necesito otro recordatorio <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="meta" class="section section-shell" aria-labelledby="goal-heading">
+        <div class="section-heading reveal">
+          <p class="eyebrow">04 · Para ir sumando algo lindo</p>
+          <h2 id="goal-heading">Nuestra próxima ilusión</h2>
+          <p>Sin planillas ni culpa: apenas un frasquito que se llena cada vez que avanzamos.</p>
+        </div>
+
+        <div class="goal-card reveal">
+          <div class="goal-visual-column">
+            <div class="goal-jar" aria-hidden="true">
+              <div id="goal-fill" class="goal-fill"></div>
+              <div class="goal-sparkles"><i></i><i></i><i></i><i></i></div>
+              <span id="goal-percent" class="goal-percent">0%</span>
+            </div>
+            <p id="goal-summary" class="goal-summary" aria-live="polite"></p>
+          </div>
+
+          <form id="goal-form" class="goal-form">
+            <label>
+              <span>¿Para qué estamos juntando?</span>
+              <input id="goal-name" name="goalName" maxlength="55" required />
+            </label>
+            <label>
+              <span>¿Cómo lo medimos?</span>
+              <select id="goal-mode" name="goalMode">
+                <option value="money">Por monto</option>
+                <option value="percent">Por porcentaje</option>
+              </select>
+            </label>
+            <div class="form-row">
+              <label>
+                <span id="goal-current-label">Ya juntamos</span>
+                <input id="goal-current" name="goalCurrent" type="number" min="0" step="0.01" required />
+              </label>
+              <label id="goal-target-wrap">
+                <span>La meta es</span>
+                <input id="goal-target" name="goalTarget" type="number" min="0.01" step="0.01" required />
+              </label>
+            </div>
+            <label id="goal-currency-wrap">
+              <span>Moneda</span>
+              <select id="goal-currency" name="goalCurrency">
+                <option value="USD">USD · $</option>
+                <option value="PYG">PYG · ₲</option>
+                <option value="EUR">EUR · €</option>
+              </select>
+            </label>
+            <button class="button button-primary" type="submit">Guardar avance</button>
+            <p id="goal-saved" class="form-status" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="lima" class="section section-shell gallery-section" aria-labelledby="gallery-heading">
+        <div class="section-heading reveal">
+          <p class="eyebrow">05 · Transmisión oficial desde casa</p>
+          <h2 id="gallery-heading">El noticiero de Lima</h2>
+          <p>Deslizá, tocá la foto y recibí un aleteo internacional de alta prioridad.</p>
+        </div>
+
+        <div class="gallery-layout reveal">
+          <button id="gallery-prev" class="gallery-arrow" type="button" aria-label="Foto anterior">
+            ←
+          </button>
+          <div
+            id="gallery-stage"
+            class="gallery-stage"
+            role="group"
+            aria-roledescription="carrusel"
+            aria-label="Fotos de Lima"
+            tabindex="0"
+          >
+            <figure id="gallery-polaroid" class="gallery-polaroid">
+              <div class="photo-frame">
+                <img
+                  id="gallery-image"
+                  src="./img/lima/1.jpg"
+                  alt="Lima, el pajarito de la familia"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                />
+                <span class="photo-shine" aria-hidden="true"></span>
+              </div>
+              <figcaption id="gallery-caption"></figcaption>
+              <span id="gallery-counter" class="gallery-counter"></span>
+            </figure>
+            <p id="gallery-flap-status" class="sr-only" aria-live="polite"></p>
+          </div>
+          <button id="gallery-next" class="gallery-arrow" type="button" aria-label="Foto siguiente">
+            →
+          </button>
+        </div>
+        <div id="gallery-dots" class="gallery-dots" aria-label="Elegir foto"></div>
+        <p class="gallery-hint">Tip de Lima: “tocame la foto, humana”.</p>
+      </section>
+
+      <section id="cierre" class="section closing-section" aria-labelledby="closing-heading">
+        <div class="closing-card section-shell reveal">
+          <span class="closing-stamp" aria-hidden="true">con amor</span>
+          <p class="eyebrow">06 · Y una última cosita</p>
+          <h2 id="closing-heading"></h2>
+          <p id="closing-message" class="closing-message"></p>
+          <p id="closing-signature" class="closing-signature"></p>
+          <time id="closing-date"></time>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      Hecho con amor, cero tracking y varios papelitos virtuales.
+    </footer>
+
+    <dialog id="day-dialog" class="day-dialog" aria-labelledby="day-dialog-title">
+      <form id="day-form" method="dialog">
+        <div class="dialog-header">
+          <div>
+            <p class="small-label">Tu día</p>
+            <h2 id="day-dialog-title"></h2>
+          </div>
+          <button id="day-close" class="icon-button" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <fieldset>
+          <legend>Elegí una etiqueta</legend>
+          <div id="day-tag-options" class="day-tag-options"></div>
+        </fieldset>
+        <label class="dialog-note">
+          <span>Notita opcional</span>
+          <textarea
+            id="day-note"
+            maxlength="100"
+            rows="3"
+            placeholder="Horario, recordatorio o algo para no olvidarte…"
+          ></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button id="day-delete" class="button button-danger" type="button">Borrar marca</button>
+          <button class="button button-primary" type="submit">Guardar día</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

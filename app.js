@@ -1,0 +1,585 @@
+(() => {
+  "use strict";
+
+  const content = window.KAROL_CONTENT;
+  if (!content) return;
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const storage = {
+    read(key, fallback) {
+      try {
+        const saved = localStorage.getItem(key);
+        return saved ? JSON.parse(saved) : fallback;
+      } catch {
+        return fallback;
+      }
+    },
+    write(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        // El sitio sigue funcionando si el navegador bloquea el guardado local.
+      }
+    }
+  };
+
+  function restartAnimation(element, className) {
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  }
+
+  function capitalize(value) {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+
+  // Contenido centralizado
+  $("#hero-eyebrow").textContent = content.hero.eyebrow;
+  $("#hero-title").textContent = content.hero.title;
+  $("#hero-message").textContent = content.hero.message;
+  $("#hero-keepsake-text").textContent = content.hero.keepsake;
+  $("#closing-heading").textContent = content.closing.title;
+  $("#closing-message").textContent = content.closing.message;
+  $("#closing-signature").textContent = content.closing.signature;
+  $("#closing-date").textContent = content.closing.date;
+  $("#closing-date").dateTime = "2026-07-22";
+
+  // Apariciones suaves al hacer scroll
+  const revealItems = $$(".reveal");
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14 }
+    );
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
+
+  // Confetti liviano, sin librerías
+  const confettiLayer = $("#confetti-layer");
+  const confettiColors = ["#a95143", "#c997a7", "#7d9278", "#e1b268", "#eadbc9"];
+
+  function throwConfetti(amount = 58) {
+    if (reducedMotion) return;
+    confettiLayer.replaceChildren();
+    for (let index = 0; index < amount; index += 1) {
+      const piece = document.createElement("i");
+      piece.className = "confetti-piece";
+      piece.style.left = `${Math.random() * 100}%`;
+      piece.style.background = confettiColors[index % confettiColors.length];
+      piece.style.setProperty("--fall-time", `${2.6 + Math.random() * 2.2}s`);
+      piece.style.setProperty("--drift", `${-70 + Math.random() * 140}px`);
+      piece.style.setProperty("--spin", `${360 + Math.random() * 760}deg`);
+      piece.style.animationDelay = `${Math.random() * 0.45}s`;
+      piece.style.transform = `rotate(${Math.random() * 180}deg)`;
+      confettiLayer.append(piece);
+    }
+    window.setTimeout(() => confettiLayer.replaceChildren(), 5400);
+  }
+
+  $("#confetti-again").addEventListener("click", () => throwConfetti(44));
+  window.setTimeout(() => throwConfetti(), 320);
+
+  // Calendario de turnos
+  const CALENDAR_KEY = "paraKarol.calendar.v1";
+  const calendarGrid = $("#calendar-grid");
+  const calendarMonth = $("#calendar-month");
+  const calendarLegend = $("#calendar-legend");
+  const dayDialog = $("#day-dialog");
+  const dayForm = $("#day-form");
+  const dayNote = $("#day-note");
+  const dayDelete = $("#day-delete");
+  let calendarEntries = storage.read(CALENDAR_KEY, {});
+  let visibleMonth = new Date();
+  visibleMonth.setDate(1);
+  visibleMonth.setHours(12, 0, 0, 0);
+  let activeDateKey = "";
+
+  function dateKey(date) {
+    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
+  }
+
+  function entryTag(entry) {
+    return entry ? content.calendarTags.find((tag) => tag.id === entry.tag) : null;
+  }
+
+  function renderLegend() {
+    calendarLegend.replaceChildren();
+    content.calendarTags.forEach((tag) => {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      item.innerHTML = `<i class="legend-dot" style="background:${tag.color}"></i>${tag.label}`;
+      calendarLegend.append(item);
+    });
+  }
+
+  function renderTagOptions() {
+    const container = $("#day-tag-options");
+    container.replaceChildren();
+    content.calendarTags.forEach((tag, index) => {
+      const wrap = document.createElement("div");
+      wrap.className = "day-tag-option";
+      wrap.style.setProperty("--tag-color", tag.color);
+      wrap.innerHTML = `
+        <input id="tag-${tag.id}" type="radio" name="dayTag" value="${tag.id}" ${index === 0 ? "required" : ""}>
+        <label for="tag-${tag.id}"><i class="tag-swatch"></i>${tag.label}</label>
+      `;
+      container.append(wrap);
+    });
+  }
+
+  function renderCalendar() {
+    const year = visibleMonth.getFullYear();
+    const month = visibleMonth.getMonth();
+    const monthLabel = new Intl.DateTimeFormat("es-AR", { month: "long", year: "numeric" }).format(visibleMonth);
+    calendarMonth.textContent = capitalize(monthLabel);
+    calendarGrid.replaceChildren();
+
+    const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = dateKey(new Date());
+
+    for (let index = 0; index < firstWeekday; index += 1) {
+      const spacer = document.createElement("span");
+      spacer.className = "calendar-spacer";
+      spacer.setAttribute("aria-hidden", "true");
+      calendarGrid.append(spacer);
+    }
+
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      const date = new Date(year, month, day, 12);
+      const key = dateKey(date);
+      const entry = calendarEntries[key];
+      const tag = entryTag(entry);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "calendar-day";
+      button.setAttribute("role", "gridcell");
+      button.dataset.date = key;
+      if (key === today) button.classList.add("is-today");
+
+      const spokenDate = new Intl.DateTimeFormat("es-AR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      }).format(date);
+      const entryDescription = tag ? `, ${tag.label}${entry.note ? `, nota: ${entry.note}` : ""}` : ", sin marca";
+      button.setAttribute("aria-label", `${spokenDate}${entryDescription}`);
+
+      const number = document.createElement("span");
+      number.className = "day-number";
+      number.textContent = day;
+      button.append(number);
+
+      if (tag) {
+        const marker = document.createElement("span");
+        marker.className = "day-marker";
+        marker.textContent = tag.label;
+        marker.style.background = tag.color;
+        button.append(marker);
+      }
+      if (entry?.note) {
+        const dot = document.createElement("span");
+        dot.className = "day-note-dot";
+        dot.setAttribute("aria-hidden", "true");
+        button.append(dot);
+      }
+
+      button.addEventListener("click", () => openDayEditor(key, date));
+      calendarGrid.append(button);
+    }
+  }
+
+  function openDayEditor(key, date) {
+    activeDateKey = key;
+    const entry = calendarEntries[key];
+    const formatted = new Intl.DateTimeFormat("es-AR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    }).format(date);
+    $("#day-dialog-title").textContent = capitalize(formatted);
+    $$('input[name="dayTag"]', dayForm).forEach((input) => {
+      input.checked = input.value === entry?.tag;
+    });
+    dayNote.value = entry?.note || "";
+    dayDelete.disabled = !entry;
+    dayDialog.showModal();
+  }
+
+  dayForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const selected = $('input[name="dayTag"]:checked', dayForm);
+    if (!selected) {
+      $('input[name="dayTag"]', dayForm).reportValidity();
+      return;
+    }
+    calendarEntries[activeDateKey] = {
+      tag: selected.value,
+      note: dayNote.value.trim()
+    };
+    storage.write(CALENDAR_KEY, calendarEntries);
+    renderCalendar();
+    dayDialog.close();
+  });
+
+  dayDelete.addEventListener("click", () => {
+    if (!activeDateKey) return;
+    delete calendarEntries[activeDateKey];
+    storage.write(CALENDAR_KEY, calendarEntries);
+    renderCalendar();
+    dayDialog.close();
+  });
+
+  $("#day-close").addEventListener("click", () => dayDialog.close());
+  $("#calendar-prev").addEventListener("click", () => {
+    visibleMonth.setMonth(visibleMonth.getMonth() - 1);
+    renderCalendar();
+  });
+  $("#calendar-next").addEventListener("click", () => {
+    visibleMonth.setMonth(visibleMonth.getMonth() + 1);
+    renderCalendar();
+  });
+
+  renderLegend();
+  renderTagOptions();
+  renderCalendar();
+
+  // Frasco de notas sin repeticiones
+  const JAR_KEY = "paraKarol.jarDeck.v1";
+  const noteText = $("#paper-note-text");
+  const noteCard = $("#paper-note");
+  const noteJar = $("#note-jar");
+  const noteCount = $("#paper-note-count");
+  let noteDeck = storage
+    .read(JAR_KEY, [])
+    .filter((index) => Number.isInteger(index) && index >= 0 && index < content.jarNotes.length);
+
+  function freshDeck() {
+    return content.jarNotes.map((_, index) => index);
+  }
+
+  function updateNoteCount(justReset = false) {
+    if (noteDeck.length === 0) {
+      noteCount.textContent = "Ese era el último. En el próximo click se mezclan todos de nuevo.";
+    } else if (justReset) {
+      noteCount.textContent = `Frasco mezclado de nuevo: ${noteDeck.length} papelitos.`;
+    } else {
+      noteCount.textContent = `Quedan ${noteDeck.length} papelitos antes de volver a mezclar.`;
+    }
+  }
+
+  $("#draw-note").addEventListener("click", () => {
+    let justReset = false;
+    if (noteDeck.length === 0) {
+      noteDeck = freshDeck();
+      justReset = true;
+    }
+    const deckPosition = Math.floor(Math.random() * noteDeck.length);
+    const [noteIndex] = noteDeck.splice(deckPosition, 1);
+    noteText.textContent = content.jarNotes[noteIndex];
+    storage.write(JAR_KEY, noteDeck);
+    restartAnimation(noteCard, "is-new");
+    restartAnimation(noteJar, "is-drawing");
+    updateNoteCount(justReset);
+  });
+
+  if (noteDeck.length) updateNoteCount();
+  else noteCount.textContent = `${content.jarNotes.length} papelitos esperando su turno.`;
+
+  // Respiración guiada 4-7-8
+  const breathingCard = $("#breathing-card");
+  const breathingCircle = $("#breathing-circle");
+  const breathPhase = $("#breath-phase");
+  const breathInstruction = $("#breath-instruction");
+  const breathCount = $("#breath-count");
+  const breathToggle = $("#breath-toggle");
+  const breathCycles = $("#breath-cycles");
+  const phases = [
+    { id: "inhale", title: "Inhalá suave", instruction: "Dejá que el aire entre durante 4 segundos.", seconds: 4 },
+    { id: "hold", title: "Sostené, sin apretar", instruction: "Quedate acá durante 7 segundos.", seconds: 7 },
+    { id: "exhale", title: "Soltá despacito", instruction: "Vaciá el aire durante 8 segundos.", seconds: 8 }
+  ];
+  let breathingTimer = null;
+  let isBreathing = false;
+  let phaseIndex = 0;
+  let secondsLeft = 0;
+  let completedCycles = 0;
+
+  function showPhase() {
+    const phase = phases[phaseIndex];
+    secondsLeft = phase.seconds;
+    breathingCard.dataset.phase = phase.id;
+    breathPhase.textContent = phase.title;
+    breathInstruction.textContent = phase.instruction;
+    breathCount.textContent = secondsLeft;
+    breathingCircle.style.transitionDuration = `${phase.seconds}s`;
+    breathingCircle.className = `breathing-circle ${phase.id}`;
+  }
+
+  function stopBreathing() {
+    window.clearInterval(breathingTimer);
+    breathingTimer = null;
+    isBreathing = false;
+    breathingCard.classList.remove("is-running");
+    breathingCard.dataset.phase = "rest";
+    breathingCircle.style.transitionDuration = "500ms";
+    breathingCircle.className = "breathing-circle rest";
+    breathPhase.textContent = "Pausa hecha";
+    breathInstruction.textContent = "Cuando quieras, arrancamos otro ciclo.";
+    breathCount.textContent = "·";
+    breathToggle.textContent = "Empezar de nuevo";
+  }
+
+  function advanceBreathingPhase() {
+    if (phaseIndex === phases.length - 1) {
+      completedCycles += 1;
+      breathCycles.textContent = `Ciclos completos: ${completedCycles}`;
+    }
+    phaseIndex = (phaseIndex + 1) % phases.length;
+    showPhase();
+  }
+
+  function startBreathing() {
+    isBreathing = true;
+    phaseIndex = 0;
+    breathingCard.classList.add("is-running");
+    breathToggle.textContent = "Pausar";
+    showPhase();
+    breathingTimer = window.setInterval(() => {
+      secondsLeft -= 1;
+      if (secondsLeft <= 0) {
+        advanceBreathingPhase();
+      } else {
+        breathCount.textContent = secondsLeft;
+      }
+    }, 1000);
+  }
+
+  breathToggle.addEventListener("click", () => {
+    if (isBreathing) stopBreathing();
+    else startBreathing();
+  });
+
+  // Frases con pequeñas entradas distintas
+  const affirmation = $("#affirmation-text");
+  const affirmationMotions = ["motion-rise", "motion-tilt", "motion-soft"];
+  let affirmationIndex = 0;
+  let affirmationMotionIndex = 0;
+  affirmation.textContent = content.affirmations[affirmationIndex];
+
+  $("#new-affirmation").addEventListener("click", () => {
+    let next = affirmationIndex;
+    while (next === affirmationIndex && content.affirmations.length > 1) {
+      next = Math.floor(Math.random() * content.affirmations.length);
+    }
+    affirmationIndex = next;
+    affirmationMotionIndex = (affirmationMotionIndex + 1) % affirmationMotions.length;
+    affirmation.classList.remove(...affirmationMotions);
+    affirmation.textContent = content.affirmations[affirmationIndex];
+    restartAnimation(affirmation, affirmationMotions[affirmationMotionIndex]);
+  });
+
+  // Meta compartida
+  const GOAL_KEY = "paraKarol.goal.v1";
+  const goalForm = $("#goal-form");
+  const goalName = $("#goal-name");
+  const goalMode = $("#goal-mode");
+  const goalCurrent = $("#goal-current");
+  const goalTarget = $("#goal-target");
+  const goalTargetWrap = $("#goal-target-wrap");
+  const goalCurrency = $("#goal-currency");
+  const goalCurrencyWrap = $("#goal-currency-wrap");
+  const goalFill = $("#goal-fill");
+  const goalPercent = $("#goal-percent");
+  const goalSummary = $("#goal-summary");
+  const goalSaved = $("#goal-saved");
+  const goalJar = $(".goal-jar");
+  let goal = { ...content.goalDefaults, ...storage.read(GOAL_KEY, {}) };
+
+  function currencyText(value, currency) {
+    return new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: currency === "PYG" ? 0 : 2
+    }).format(value);
+  }
+
+  function syncGoalMode() {
+    const isPercent = goalMode.value === "percent";
+    goalTargetWrap.hidden = isPercent;
+    goalCurrencyWrap.hidden = isPercent;
+    goalTarget.required = !isPercent;
+    goalCurrent.max = isPercent ? "100" : "";
+    $("#goal-current-label").textContent = isPercent ? "Avance actual (%)" : "Ya juntamos";
+  }
+
+  function renderGoal(animate = false) {
+    const target = goal.mode === "percent" ? 100 : Math.max(Number(goal.target), 0.01);
+    const current = Math.max(Number(goal.current), 0);
+    const rawPercent = (current / target) * 100;
+    const fillPercent = Math.min(Math.max(rawPercent, 0), 100);
+    goalFill.style.height = `${fillPercent}%`;
+    goalPercent.textContent = `${Math.round(rawPercent)}%`;
+
+    if (goal.mode === "percent") {
+      goalSummary.textContent = `${goal.name}: vamos por ${Math.round(current)}%. ${current >= 100 ? "¡Meta cumplida, che!" : "Pasito a pasito."}`;
+    } else {
+      goalSummary.textContent = `${goal.name}: ${currencyText(current, goal.currency)} de ${currencyText(target, goal.currency)}. ${current >= target ? "¡Meta cumplida, che!" : "Vamos sumando."}`;
+    }
+
+    if (animate) {
+      restartAnimation(goalJar, "is-saved");
+    }
+  }
+
+  function fillGoalForm() {
+    goalName.value = goal.name;
+    goalMode.value = goal.mode;
+    goalCurrent.value = goal.current;
+    goalTarget.value = goal.target;
+    goalCurrency.value = goal.currency;
+    syncGoalMode();
+    renderGoal();
+  }
+
+  goalMode.addEventListener("change", syncGoalMode);
+  goalForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const mode = goalMode.value;
+    goal = {
+      name: goalName.value.trim(),
+      mode,
+      current: Math.max(Number(goalCurrent.value), 0),
+      target: mode === "percent" ? 100 : Math.max(Number(goalTarget.value), 0.01),
+      currency: goalCurrency.value
+    };
+    storage.write(GOAL_KEY, goal);
+    renderGoal(true);
+    goalSaved.textContent = "Listo, quedó guardado en este dispositivo ♥";
+    window.setTimeout(() => {
+      goalSaved.textContent = "";
+    }, 3500);
+  });
+
+  fillGoalForm();
+
+  // Galería: descubre 1.jpg, 2.jpg... hasta el primer número que falte.
+  const galleryImage = $("#gallery-image");
+  const galleryCaption = $("#gallery-caption");
+  const galleryCounter = $("#gallery-counter");
+  const galleryPolaroid = $("#gallery-polaroid");
+  const galleryStage = $("#gallery-stage");
+  const galleryDots = $("#gallery-dots");
+  const galleryFlapStatus = $("#gallery-flap-status");
+  let galleryCount = Math.max(content.galleryCaptions.length, 1);
+  let galleryIndex = 0;
+  let pointerStartX = null;
+
+  function galleryPath(index) {
+    return `./img/lima/${index + 1}.jpg`;
+  }
+
+  function extraGalleryCaption(number) {
+    return content.galleryExtraCaption.replace("{n}", number);
+  }
+
+  function renderGalleryDots() {
+    galleryDots.replaceChildren();
+    for (let index = 0; index < galleryCount; index += 1) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = `gallery-dot${index === galleryIndex ? " is-active" : ""}`;
+      dot.setAttribute("aria-label", `Ver foto ${index + 1}`);
+      dot.addEventListener("click", () => showGalleryImage(index));
+      galleryDots.append(dot);
+    }
+  }
+
+  function showGalleryImage(index) {
+    galleryIndex = (index + galleryCount) % galleryCount;
+    galleryImage.classList.add("is-loading");
+    galleryImage.src = galleryPath(galleryIndex);
+    galleryImage.alt = `Lima, el pajarito de la familia, en la foto ${galleryIndex + 1}`;
+    galleryCaption.textContent = content.galleryCaptions[galleryIndex] || extraGalleryCaption(galleryIndex + 1);
+    galleryCounter.textContent = `${galleryIndex + 1} / ${galleryCount}`;
+    $$(".gallery-dot", galleryDots).forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === galleryIndex);
+    });
+  }
+
+  galleryImage.addEventListener("load", () => galleryImage.classList.remove("is-loading"));
+  galleryImage.addEventListener("error", () => {
+    galleryImage.classList.remove("is-loading");
+    galleryCaption.textContent = "Lima está reprogramando esta transmisión. Volvé a intentar en un ratito.";
+  });
+
+  async function discoverGallery() {
+    if (location.protocol === "file:") {
+      renderGalleryDots();
+      showGalleryImage(0);
+      return;
+    }
+    let found = 0;
+    for (let number = 1; number <= 40; number += 1) {
+      try {
+        const response = await fetch(`./img/lima/${number}.jpg`, { method: "HEAD", cache: "no-store" });
+        if (!response.ok) break;
+        found = number;
+      } catch {
+        break;
+      }
+    }
+    if (found > 0) galleryCount = found;
+    renderGalleryDots();
+    showGalleryImage(0);
+  }
+
+  $("#gallery-prev").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
+  $("#gallery-next").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
+
+  galleryPolaroid.addEventListener("click", () => {
+    restartAnimation(galleryPolaroid, "is-flapping");
+    galleryFlapStatus.textContent = "Frrr, frrr: Lima mandó un aleteo internacional.";
+    window.setTimeout(() => {
+      galleryFlapStatus.textContent = "";
+    }, 1800);
+  });
+
+  galleryStage.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showGalleryImage(galleryIndex - 1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showGalleryImage(galleryIndex + 1);
+    }
+  });
+
+  galleryStage.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+  galleryStage.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) < 45) return;
+    showGalleryImage(galleryIndex + (distance < 0 ? 1 : -1));
+  });
+  galleryStage.addEventListener("pointercancel", () => {
+    pointerStartX = null;
+  });
+
+  discoverGallery();
+})();
