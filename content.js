@@ -43,11 +43,16 @@ window.KAROL_CONTENT = {
       kicker: "Abrí cuando sientas que no hiciste suficiente",
       title: "Mirá un segundo todo lo que ya hiciste",
       body: [
-        "Te fuiste lejos, aprendiste códigos nuevos, trabajos nuevos, inviernos nuevos y mil maneras de arreglártelas. Y aun así seguís encontrando tiempo para preguntar cómo estamos, mandar una idea, explicar una receta o ayudar a destrabar algo desde otro país.",
-        "Eso no lo hace alguien que ‘no puede’. Lo hace alguien cansada, sí; a veces perdida, también; pero tremendamente capaz. No necesitás tener la próxima parte resuelta para que todo lo anterior cuente.",
-        "Si hoy tu cabeza está armando un juicio oral con tus errores, queda suspendido por falta de pruebas y exceso de sueño."
+        "No sé qué pasó hoy ni qué parte de vos estás poniendo en duda, pero te conozco lo suficiente para saber que a veces un error o un día malo alcanzan para que tu cabeza se olvide de todo lo demás.",
+        "Así que te lo recuerdo yo: te fuiste lejos y empezaste una vida completamente nueva. Aprendiste trabajos, códigos, inviernos y mil formas de arreglártelas con cosas que antes ni siquiera formaban parte de tu mundo. Muchas veces lo hiciste con miedo, cansada o sin saber muy bien qué venía después. Pero lo hiciste.",
+        "Saliste de casa siendo muy joven, buscaste trabajos y empezaste a construir tu propia vida cuando todavía estabas aprendiendo quién eras. Alquilaste tu propio lugar, lo decoraste y lo convertiste en tu casa. Te fuiste a Europa, conociste otro mundo, volviste y después encontraste la manera de irte otra vez, esta vez a Estados Unidos. Llegaste a lugares nuevos sin tener todo resuelto y, aun así, construiste una vida entera: un hogar, un trabajo, personas que te quieren y una versión de vos que creció una locura en el camino. Capaz por vivirlo paso a paso no te das cuenta de la magnitud, pero visto desde afuera es increíble todo lo que hiciste.",
+        "Y no creo que seas capaz porque siempre tengas la respuesta correcta o porque todo te salga bien. Creo que sos capaz porque, incluso cuando las cosas te superan, encontrás la forma de acomodarte, aprender algo y volver a intentarlo. Porque te animaste a construir una vida en un lugar nuevo sin dejar de ser vos. Porque hubo un montón de días difíciles que parecían enormes y, aun así, hoy están atrás tuyo.",
+        "Capaz ahora mismo no podés ver todo lo que avanzaste porque estás demasiado cerca de lo que te preocupa. Pero desde acá yo sí lo veo. Veo todo lo que creciste, todo lo que aprendiste y la cantidad de veces que seguiste adelante aun sin sentirte preparada.",
+        "No necesitás tener la próxima parte resuelta para que todo eso cuente. Estar confundida no significa que estés perdida para siempre, y tener miedo no significa que no puedas hacerlo. Solamente significa que esto te importa y que todavía estás encontrando tu manera.",
+        "Yo no sé exactamente cómo va a salir todo, pero sí sé algo: todavía no llegaste hasta donde sos capaz de llegar. Te quedan un montón de cosas lindas que conocer, construir y descubrir de vos misma. Y algún día vas a mirar este momento desde más lejos y te vas a dar cuenta de que tampoco era el final, era solamente otra parte del camino.",
+        "Hasta que puedas volver a verlo vos, acordate de que yo lo veo clarísimo."
       ],
-      signature: "Yo confío en vos también en los días en que vos no podés."
+      signature: "Estoy muy orgullosa de vos, hermana. Te quiero un montón montonazo y siempre voy a estar de tu lado."
     },
     {
       id: "de-mi-lado",
