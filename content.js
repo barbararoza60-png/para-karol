@@ -28,11 +28,14 @@ window.KAROL_CONTENT = {
       kicker: "Abrí cuando la distancia se haga la viva",
       title: "Casa no se olvidó de vos",
       body: [
-        "Acá siguen existiendo los gritos por un partido, la comida argentina usada como argumento diplomático y Lima supervisando todo con cero preparación profesional. Ahora, además, hay una paloma que se cree parte de la familia. El barrio evolucionó sin consultar.",
-        "Sé que ninguna lista de cosas conocidas reemplaza estar acá. Pero casa también es la gente que se acuerda de vos en medio de una pavada y piensa: ‘esto se lo tengo que contar a Karol’. Y eso pasa un montón.",
-        "No estás afuera de nuestras vidas: estás adentro, solo que con otro clima y un huso horario bastante cargoso."
+        "No sé qué parte de casa estás extrañando hoy. Capaz la comida, el ruido, ver a Lima en el balcón, escuchar a todos gritar por un partido o simplemente estar cerca de gente que entiende de qué estás hablando sin que tengas que explicar demasiado.",
+        "Acá las cosas siguen pasando. Las golondrinas volvieron, Lima adoptó una paloma bastante sospechosa y en los partidos seguimos gritando como si el resultado dependiera personalmente de nosotros. Cada tanto también cocino algo y pienso que probablemente vos me habrías mandado una receta que empieza con “lavarse las manos” y tiene alguna medida inexplicable como la tacita roja de Nescafé.",
+        "Pero más allá de todas esas cosas, quiero que sepas que nadie se olvidó de vos. No sos simplemente alguien que vivió acá y después se fue. Dejaste algo tuyo en la gente, en la casa y en un montón de cosas que para vos probablemente eran normales. En mí dejaste muchísimo más de lo que te digo.",
+        "Casa también es acordarme de vos en medio de cualquier pavada y pensar “esto se lo tengo que contar a Karol”. Es mandarte una foto de Lima, preguntarte si estás viendo el partido, contarte un chisme que no tiene ninguna importancia o mostrarte algo de comida argentina para que sufras desde lejos. Seguís estando en mi vida de todas esas maneras, todos los días.",
+        "Sé que esto no reemplaza estar acá y que a veces extrañar es más fuerte. Pero tampoco significa que hayas quedado afuera de nuestras vidas. Podés estar construyendo tu propia casa allá y seguir teniendo esta acá.",
+        "Acá siempre tenés tu lugar. Con comida pendiente, Lima y sus palomapornis y un abrazo mío que te está esperando."
       ],
-      signature: "Acá tenés lugar siempre. Con abrazo pendiente y chisme acumulado."
+      signature: "Te quiero un montón montonazo, hermana. Nadie se olvida de vos, y yo menos que nadie."
     },
     {
       id: "duda",
