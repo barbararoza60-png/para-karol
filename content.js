@@ -1,7 +1,7 @@
 window.KAROL_CONTENT = {
   hero: {
     eyebrow: "22 de julio de 2026 · un abrazo que cruzó un par de fronteras",
-    title: "FELIZ CUMPLEEEE, KAROL 🎉",
+    title: "Feliz cumpleee, Karol 🎉",
     message:
       "Te quiero muchísimo y te extraño un montón, y Lima también, que ya no tiene quien le toque la patita!!\n\nSé que venís trabajando muchísimo allá y aun así siempre estás ahí para mí, con todo. Así que te armé este rinconcito random para respirar un toque y tener un pedacito de casa cerca, aunque haya un mapa entero en el medio.",
     keepsake:
