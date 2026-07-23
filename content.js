@@ -1,6 +1,6 @@
 window.KAROL_CONTENT = {
   hero: {
-    eyebrow: "22 de julio de 2026 · un abrazo que cruzó un par de fronteras",
+    eyebrow: "24 de julio de 2026 · miles de abrazos mandados desde la selva (a.k.a. Posadas, Misiones)",
     title: "Feliz cumpleee, Karol 🎉",
     message:
       "Te quiero muchísimo y te extraño un montón, y Lima también, que ya no tiene quien le toque la patita!!\n\nSé que venís trabajando muchísimo allá y aun así siempre estás ahí para mí, con todo. Así que te armé este rinconcito random para respirar un toque y tener un pedacito de casa cerca, aunque haya un mapa entero en el medio.",
@@ -221,6 +221,6 @@ window.KAROL_CONTENT = {
     message:
       "No reemplaza tenerte acá, ni una charla larga, ni un abrazo de esos que acomodan todo. Pero quería que tuvieras algo hecho para vos: cartas para abrir cuando haga falta, pausas para los días largos y pequeñas excusas para seguir compartiendo la vida. Estoy orgullosa de todo lo que construiste, incluso de lo que todavía no alcanzás a ver. Feliz vuelta al sol, hermana. Te quiero un montón montonazo.",
     signature: "Con todo mi amor,\ntu hermana (y Lima, que claramente supervisó).",
-    date: "22 de julio de 2026"
+    date: "24 de julio de 2026"
   }
 };
