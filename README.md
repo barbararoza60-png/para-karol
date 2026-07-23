@@ -2,29 +2,15 @@
 
 Un regalo de cumpleaños mobile-first y 100% estático. Incluye calendario de turnos, frasco de notas, respiración 4-7-8, recordatorios, meta compartida y galería de Lima. No usa backend, cuentas, analytics ni servicios pagos: el calendario y la meta viven solamente en `localStorage` del navegador.
 
-## Publicarlo hoy en GitHub Pages
+## Sitio publicado
 
-1. En GitHub, creá un repositorio **público** llamado `para-karol`. No agregues README ni otros archivos desde GitHub, porque ya están incluidos acá.
-2. Abrí PowerShell dentro de esta carpeta y ejecutá:
-
-```powershell
-git init
-git add .
-git commit -m "Regalo para Karol"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/para-karol.git
-git push -u origin main
-```
-
-3. En el repositorio de GitHub, entrá a **Settings → Pages**. En **Source**, elegí **GitHub Actions**.
-4. Abrí la pestaña **Actions** y esperá a que “Publicar Para Karol” aparezca en verde. Cada cambio futuro que subas a `main` vuelve a publicar el sitio automáticamente.
-5. La dirección final será:
+La versión pública está en:
 
 ```text
-https://TU-USUARIO.github.io/para-karol/
+https://barbararoza60-png.github.io/para-karol/
 ```
 
-Todos los enlaces y las imágenes usan rutas relativas, así que funcionan correctamente dentro de `/para-karol/` sin ninguna configuración adicional.
+GitHub Pages publica automáticamente la carpeta raíz de la rama `main`. Cada cambio nuevo guardado en esa rama actualiza el enlace, sin servidor ni servicio pago. Todos los enlaces y las imágenes usan rutas relativas para funcionar correctamente dentro de `/para-karol/`.
 
 ## Verlo antes en tu computadora
 
