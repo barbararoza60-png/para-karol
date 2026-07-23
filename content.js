@@ -75,11 +75,15 @@ window.KAROL_CONTENT = {
       kicker: "Abrí cuando tengas una victoria, aunque sea diminuta",
       title: "Pará todo: esto se festeja",
       body: [
-        "No me vengas con que ‘no es para tanto’. Si te costó, si te dio alegría o si por fin salió esa cosa que venías esperando, entonces es para tanto. Contámelo con lujo de detalles y repetí las mejores partes.",
-        "Desde acá se activa festejo exagerado, análisis innecesario y orgullo de hermana. Si amerita grito de gol en horario laboral, se evaluará con total falta de objetividad.",
-        "Quiero estar también para lo bueno, no solamente para apagar incendios. Tu alegría tiene lugar acá."
+        "No importa si es una noticia enorme, algo que venías esperando hace meses o una pavada que simplemente te alegró el día. Si te hizo feliz, te dio alivio o te sacó una sonrisa, yo quiero saberlo.",
+        "Vos estuviste presente en un montón de mis momentos lindos desde que era chica. Fuiste de las primeras personas en las que pensaba cuando algo me salía bien, cuando conseguía algo o cuando me pasaba una boludez que necesitaba contarle a alguien. Y aunque ahora estemos lejos, eso no cambió.",
+        "Quiero saber todos los detalles: cómo pasó, cómo te enteraste, qué pensaste primero y qué fue lo que más te emocionó. Podés mandarme una captura, un audio larguísimo o contarme la misma parte cinco veces. Yo voy a reaccionar con todo el orgullo de hermana y el nivel de análisis innecesario que corresponda.",
+        "Porque quiero estar en tu vida cuando las cosas pesan, pero también cuando se sienten livianas. Quiero compartir las veces en que algo por fin sale, cuando aparece una oportunidad, cuando conseguís eso por lo que trabajaste o cuando la vida simplemente te regala un día lindo.",
+        "Quiero que disfrutes esas cosas sabiendo que, de este lado, hay alguien genuinamente feliz por vos. Alguien que conoce todo lo que te costó llegar hasta acá y que quiere verte recibir también cosas buenas.",
+        "Desde acá se activa el festejo exagerado y, si la noticia lo amerita, un grito de gol completamente desproporcionado. Lima será informada aunque no entienda absolutamente nada.",
+        "Sea lo que sea, ya me alegra saber que te hizo feliz."
       ],
-      signature: "Mandame la noticia. Ya estoy orgullosa antes de saber cuál es."
+      signature: "Ahora contame. Quiero festejar con vos."
     },
     {
       id: "reirme",
