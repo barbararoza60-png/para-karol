@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f7efe4" />
     <meta
       name="description"
-      content="Un regalo de cumpleaños para Karol: turnos, papelitos, calma, metas y noticias de Lima."
+      content="Un regalo de cumpleaños para Karol: cartas, papelitos, calma, pequeños rituales juntas y noticias de Lima."
     />
     <title>Para Karol · Un abrazo desde casa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,9 +15,9 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=2" />
-    <script src="./content.js?v=1" defer></script>
-    <script src="./app.js?v=2" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=3" />
+    <script src="./content.js?v=2" defer></script>
+    <script src="./app.js?v=3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -43,10 +43,10 @@
           <span id="mobile-back-label">Volver al menú</span>
         </button>
         <div class="nav-links">
-          <a href="#turnos">Turnos</a>
+          <a href="#cartas">Cartas</a>
           <a href="#papelitos">Papelitos</a>
           <a href="#calma">Calma</a>
-          <a href="#meta">Nuestra meta</a>
+          <a href="#juntas">Juntas</a>
           <a href="#lima">Lima</a>
         </div>
       </nav>
@@ -59,7 +59,7 @@
           <h1 id="hero-title"></h1>
           <p id="hero-message" class="hero-message"></p>
           <div class="hero-actions">
-            <a id="open-gift" class="button button-primary" href="#turnos">Abrir tu regalito</a>
+            <a id="open-gift" class="button button-primary" href="#cartas">Abrir tu regalito</a>
             <button id="confetti-again" class="button button-quiet" type="button">
               Otro poquito de festejo
             </button>
@@ -91,10 +91,10 @@
             <p>Entrá a una sección. Cuando termines, el botón de arriba siempre te trae de vuelta.</p>
           </div>
           <nav class="gift-menu-grid" aria-label="Menú del regalo">
-            <a class="gift-menu-card" href="#turnos">
+            <a class="gift-menu-card" href="#cartas">
               <span>01</span>
-              <strong>Mis turnos</strong>
-              <small>Organizar días y horarios</small>
+              <strong>Abrí cuando...</strong>
+              <small>Una carta para cada momento</small>
             </a>
             <a class="gift-menu-card" href="#papelitos">
               <span>02</span>
@@ -106,10 +106,10 @@
               <strong>Necesito calma</strong>
               <small>Respirar y soltar el turno</small>
             </a>
-            <a class="gift-menu-card" href="#meta">
+            <a class="gift-menu-card" href="#juntas">
               <span>04</span>
-              <strong>Nuestra meta</strong>
-              <small>Sumar para algo lindo</small>
+              <strong>Dos minutos juntas</strong>
+              <small>Una misión para sentirnos cerca</small>
             </a>
             <a class="gift-menu-card" href="#lima">
               <span>05</span>
@@ -125,32 +125,30 @@
         </div>
       </section>
 
-      <section id="turnos" class="section section-shell" aria-labelledby="calendar-heading">
+      <section id="cartas" class="section section-shell letters-section" aria-labelledby="letters-heading">
         <div class="section-heading reveal">
-          <p class="eyebrow">01 · Para ordenar el quilombo</p>
-          <h2 id="calendar-heading">Tus días, a tu manera</h2>
+          <p class="eyebrow">01 · Para abrir justo cuando haga falta</p>
+          <h2 id="letters-heading">Cartas con destinataria y momento</h2>
           <p>
-            Tocá un día, elegí una etiqueta y, si hace falta, dejate una notita. Queda guardado
-            solamente en este dispositivo.
+            Elegí cómo viene el día. Hay una carta para el cansancio, la distancia, la duda
+            y también para cuando tengas algo lindo que contar.
           </p>
         </div>
 
-        <div class="calendar-card reveal">
-          <div class="calendar-toolbar">
-            <button id="calendar-prev" class="icon-button" type="button" aria-label="Mes anterior">
-              <span aria-hidden="true">←</span>
-            </button>
-            <h3 id="calendar-month" aria-live="polite"></h3>
-            <button id="calendar-next" class="icon-button" type="button" aria-label="Mes siguiente">
-              <span aria-hidden="true">→</span>
-            </button>
+        <div class="letters-layout reveal">
+          <div class="letter-keepsake" aria-hidden="true">
+            <span class="letter-postmark">CASA</span>
+            <div class="letter-envelope">
+              <span></span>
+              <i>para K</i>
+            </div>
+            <p>Envío prioritario<br />sin importar el huso horario</p>
           </div>
-          <div class="calendar-weekdays" aria-hidden="true">
-            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span
-            ><span>Sáb</span><span>Dom</span>
+          <div class="letters-picker">
+            <p class="small-label">Hoy necesito abrir una porque...</p>
+            <div id="letter-buttons" class="letter-buttons"></div>
+            <p class="letters-footnote">Podés volver todas las veces que quieras. Las cartas no vencen.</p>
           </div>
-          <div id="calendar-grid" class="calendar-grid" role="grid"></div>
-          <div id="calendar-legend" class="calendar-legend" aria-label="Etiquetas disponibles"></div>
         </div>
       </section>
 
@@ -223,56 +221,35 @@
         </div>
       </section>
 
-      <section id="meta" class="section section-shell" aria-labelledby="goal-heading">
+      <section id="juntas" class="section section-shell together-section" aria-labelledby="together-heading">
         <div class="section-heading reveal">
-          <p class="eyebrow">04 · Para ir sumando algo lindo</p>
-          <h2 id="goal-heading">Nuestra próxima ilusión</h2>
-          <p>Sin planillas ni culpa: apenas un frasquito que se llena cada vez que avanzamos.</p>
+          <p class="eyebrow">04 · Para achicar el mapa un ratito</p>
+          <h2 id="together-heading">Dos minutos juntas</h2>
+          <p>Una misión chiquita por día para compartir algo real, aunque cada una esté en una punta.</p>
         </div>
 
-        <div class="goal-card reveal">
-          <div class="goal-visual-column">
-            <div class="goal-jar" aria-hidden="true">
-              <div id="goal-fill" class="goal-fill"></div>
-              <div class="goal-sparkles"><i></i><i></i><i></i><i></i></div>
-              <span id="goal-percent" class="goal-percent">0%</span>
+        <div id="mission-card" class="mission-card reveal">
+          <div class="mission-postcard">
+            <div class="mission-stamp" aria-hidden="true">
+              <span>AR</span>
+              <i>↗</i>
             </div>
-            <p id="goal-summary" class="goal-summary" aria-live="polite"></p>
+            <p id="mission-date" class="small-label"></p>
+            <p class="mission-kicker">Misión de hermanas · nivel cero presión</p>
+            <h3 id="mission-title"></h3>
+            <p id="mission-prompt"></p>
+            <div class="mission-route" aria-hidden="true">
+              <span>Barbi</span><i></i><span>Karol</span>
+            </div>
           </div>
-
-          <form id="goal-form" class="goal-form">
-            <label>
-              <span>¿Para qué estamos juntando?</span>
-              <input id="goal-name" name="goalName" maxlength="55" required />
-            </label>
-            <label>
-              <span>¿Cómo lo medimos?</span>
-              <select id="goal-mode" name="goalMode">
-                <option value="money">Por monto</option>
-                <option value="percent">Por porcentaje</option>
-              </select>
-            </label>
-            <div class="form-row">
-              <label>
-                <span id="goal-current-label">Ya juntamos</span>
-                <input id="goal-current" name="goalCurrent" type="number" min="0" step="0.01" required />
-              </label>
-              <label id="goal-target-wrap">
-                <span>La meta es</span>
-                <input id="goal-target" name="goalTarget" type="number" min="0.01" step="0.01" required />
-              </label>
-            </div>
-            <label id="goal-currency-wrap">
-              <span>Moneda</span>
-              <select id="goal-currency" name="goalCurrency">
-                <option value="USD">USD · $</option>
-                <option value="PYG">PYG · ₲</option>
-                <option value="EUR">EUR · €</option>
-              </select>
-            </label>
-            <button class="button button-primary" type="submit">Guardar avance</button>
-            <p id="goal-saved" class="form-status" role="status"></p>
-          </form>
+          <div class="mission-actions">
+            <button id="mission-done" class="button button-primary" type="button">La hacemos hoy</button>
+            <button id="mission-share" class="button button-quiet" type="button">Mandársela a Barbi</button>
+            <button id="mission-next" class="text-button" type="button">
+              Hoy prefiero otra <span aria-hidden="true">↻</span>
+            </button>
+            <p id="mission-status" class="mission-status" role="status"></p>
+          </div>
         </div>
       </section>
 
@@ -336,33 +313,19 @@
       Hecho con amor, cero tracking y varios papelitos virtuales.
     </footer>
 
-    <dialog id="day-dialog" class="day-dialog" aria-labelledby="day-dialog-title">
-      <form id="day-form" method="dialog">
+    <dialog id="letter-dialog" class="letter-dialog" aria-labelledby="letter-dialog-title">
+      <article>
         <div class="dialog-header">
           <div>
-            <p class="small-label">Tu día</p>
-            <h2 id="day-dialog-title"></h2>
+            <p id="letter-dialog-kicker" class="small-label"></p>
+            <h2 id="letter-dialog-title"></h2>
           </div>
-          <button id="day-close" class="icon-button" type="button" aria-label="Cerrar">×</button>
+          <button id="letter-dialog-close" class="icon-button" type="button" aria-label="Cerrar carta">×</button>
         </div>
-        <fieldset>
-          <legend>Elegí una etiqueta</legend>
-          <div id="day-tag-options" class="day-tag-options"></div>
-        </fieldset>
-        <label class="dialog-note">
-          <span>Notita opcional</span>
-          <textarea
-            id="day-note"
-            maxlength="100"
-            rows="3"
-            placeholder="Horario, recordatorio o algo para no olvidarte…"
-          ></textarea>
-        </label>
-        <div class="dialog-actions">
-          <button id="day-delete" class="button button-danger" type="button">Borrar marca</button>
-          <button class="button button-primary" type="submit">Guardar día</button>
-        </div>
-      </form>
+        <div id="letter-dialog-body" class="letter-dialog-body"></div>
+        <p id="letter-dialog-signature" class="letter-dialog-signature"></p>
+        <button id="letter-dialog-done" class="button button-primary" type="button">Guardar este abrazo</button>
+      </article>
     </dialog>
   </body>
 </html>

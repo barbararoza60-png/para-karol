@@ -32,10 +32,6 @@
     element.classList.add(className);
   }
 
-  function capitalize(value) {
-    return value.charAt(0).toUpperCase() + value.slice(1);
-  }
-
   // Contenido centralizado
   $("#hero-eyebrow").textContent = content.hero.eyebrow;
   $("#hero-title").textContent = content.hero.title;
@@ -168,6 +164,50 @@
   $("#confetti-again").addEventListener("click", () => throwConfetti(44));
   window.setTimeout(() => throwConfetti(), 320);
 
+  // Cartas para abrir cuando haga falta
+  const letterButtons = $("#letter-buttons");
+  const letterDialog = $("#letter-dialog");
+  const letterDialogKicker = $("#letter-dialog-kicker");
+  const letterDialogTitle = $("#letter-dialog-title");
+  const letterDialogBody = $("#letter-dialog-body");
+  const letterDialogSignature = $("#letter-dialog-signature");
+
+  function openLetter(letter) {
+    letterDialogKicker.textContent = letter.kicker;
+    letterDialogTitle.textContent = letter.title;
+    letterDialogBody.replaceChildren();
+    letter.body.forEach((paragraph) => {
+      const text = document.createElement("p");
+      text.textContent = paragraph;
+      letterDialogBody.append(text);
+    });
+    letterDialogSignature.textContent = letter.signature;
+    letterDialog.showModal();
+  }
+
+  content.openWhenLetters.forEach((letter, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "letter-choice";
+    button.innerHTML = `
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <strong>${letter.tab}</strong>
+      <i aria-hidden="true">↗</i>
+    `;
+    button.addEventListener("click", () => openLetter(letter));
+    letterButtons.append(button);
+  });
+
+  function closeLetter() {
+    letterDialog.close();
+  }
+
+  $("#letter-dialog-close").addEventListener("click", closeLetter);
+  $("#letter-dialog-done").addEventListener("click", closeLetter);
+  letterDialog.addEventListener("click", (event) => {
+    if (event.target === letterDialog) closeLetter();
+  });
+
   // Calendario de turnos
   const CALENDAR_KEY = "paraKarol.calendar.v1";
   const calendarGrid = $("#calendar-grid");
@@ -177,6 +217,7 @@
   const dayForm = $("#day-form");
   const dayNote = $("#day-note");
   const dayDelete = $("#day-delete");
+  if (calendarGrid) {
   let calendarEntries = storage.read(CALENDAR_KEY, {});
   let visibleMonth = new Date();
   visibleMonth.setDate(1);
@@ -332,6 +373,7 @@
   renderLegend();
   renderTagOptions();
   renderCalendar();
+  }
 
   // Frasco de notas sin repeticiones
   const JAR_KEY = "paraKarol.jarDeck.v1";
@@ -483,6 +525,7 @@
   const goalSummary = $("#goal-summary");
   const goalSaved = $("#goal-saved");
   const goalJar = $(".goal-jar");
+  if (goalForm) {
   let goal = { ...content.goalDefaults, ...storage.read(GOAL_KEY, {}) };
 
   function currencyText(value, currency) {
@@ -551,6 +594,116 @@
   });
 
   fillGoalForm();
+  }
+
+  // Una misión breve para sentirse cerca, distinta cada día
+  const TOGETHER_KEY = "paraKarol.together.v1";
+  const missionCard = $("#mission-card");
+  const missionDate = $("#mission-date");
+  const missionTitle = $("#mission-title");
+  const missionPrompt = $("#mission-prompt");
+  const missionDone = $("#mission-done");
+  const missionStatus = $("#mission-status");
+  const today = new Date();
+  const todayKey = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+
+  function dailyMissionIndex() {
+    const seed = [...todayKey].reduce((total, character) => total + character.charCodeAt(0), 0);
+    return seed % content.togetherMissions.length;
+  }
+
+  let missionState = storage.read(TOGETHER_KEY, {});
+  if (
+    missionState.date !== todayKey ||
+    !Number.isInteger(missionState.index) ||
+    missionState.index < 0 ||
+    missionState.index >= content.togetherMissions.length
+  ) {
+    missionState = { date: todayKey, index: dailyMissionIndex(), done: false };
+    storage.write(TOGETHER_KEY, missionState);
+  }
+
+  function currentMission() {
+    return content.togetherMissions[missionState.index];
+  }
+
+  function renderMission(message = "") {
+    const mission = currentMission();
+    const formattedDate = new Intl.DateTimeFormat("es-AR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    }).format(today);
+    missionDate.textContent = `Para hoy · ${formattedDate}`;
+    missionTitle.textContent = mission.title;
+    missionPrompt.textContent = mission.prompt;
+    missionDone.textContent = missionState.done ? "Hecha por hoy ♥" : "La hacemos hoy";
+    missionDone.setAttribute("aria-pressed", String(Boolean(missionState.done)));
+    missionCard.classList.toggle("is-complete", Boolean(missionState.done));
+    missionStatus.textContent = message || (missionState.done ? "Listo. Hoy el mapa quedó un poquito más chico." : "");
+  }
+
+  missionDone.addEventListener("click", () => {
+    missionState.done = !missionState.done;
+    storage.write(TOGETHER_KEY, missionState);
+    renderMission(missionState.done ? "Guardada para hoy. Sin racha, sin culpa: solamente un ratito juntas." : "La dejamos pendiente, cero drama.");
+    if (missionState.done) throwConfetti(24);
+  });
+
+  $("#mission-next").addEventListener("click", () => {
+    missionState.index = (missionState.index + 1) % content.togetherMissions.length;
+    missionState.done = false;
+    storage.write(TOGETHER_KEY, missionState);
+    renderMission("Nueva misión servida. Esta capaz pega mejor con hoy.");
+    restartAnimation(missionCard, "is-changing");
+  });
+
+  async function copyMission(text) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Sigue con el método compatible con navegadores más viejos.
+      }
+    }
+    const helper = document.createElement("textarea");
+    helper.value = text;
+    helper.setAttribute("readonly", "");
+    helper.style.position = "fixed";
+    helper.style.opacity = "0";
+    document.body.append(helper);
+    helper.select();
+    const copied = document.execCommand("copy");
+    helper.remove();
+    return copied;
+  }
+
+  $("#mission-share").addEventListener("click", async () => {
+    const mission = currentMission();
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `Dos minutos juntas · ${mission.title}`, text: mission.shareText });
+        missionStatus.textContent = "Misión lista para viajar ♥";
+        return;
+      }
+      const copied = await copyMission(mission.shareText);
+      missionStatus.textContent = copied
+        ? "Copiada. Pegala en nuestro chat y que empiece la misión."
+        : "No pude copiarla, pero podés mandarme el título de la misión.";
+    } catch (error) {
+      if (error?.name !== "AbortError") {
+        const copied = await copyMission(mission.shareText);
+        missionStatus.textContent = copied ? "Copiada para mandar por WhatsApp." : "No pude compartirla esta vez.";
+      }
+    }
+  });
+
+  renderMission();
 
   // Galería: descubre 1.jpg, 2.jpg... hasta el primer número que falte.
   const galleryImage = $("#gallery-image");

@@ -1,6 +1,6 @@
 # Para Karol
 
-Un regalo de cumpleaños mobile-first y 100% estático. Incluye calendario de turnos, frasco de notas, respiración 4-7-8, recordatorios, meta compartida y galería de Lima. No usa backend, cuentas, analytics ni servicios pagos: el calendario y la meta viven solamente en `localStorage` del navegador.
+Un regalo de cumpleaños mobile-first y 100% estático. Incluye cartas para distintos momentos, frasco de notas, respiración 4-7-8, misiones breves para compartir a distancia y galería de Lima. No usa backend, cuentas, analytics ni servicios pagos.
 
 ## Sitio publicado
 
@@ -29,9 +29,10 @@ Todo el contenido personal está en un único archivo: [`content.js`](./content.
 Ahí podés actualizar:
 
 - `hero`: bienvenida de la portada.
+- `openWhenLetters`: títulos y textos de las cartas “Abrí cuando…”.
 - `jarNotes`: papelitos del frasco.
 - `affirmations`: frases del rincón de calma.
-- `goalDefaults`: meta inicial (solo se usa antes del primer guardado en el navegador).
+- `togetherMissions`: misiones de “Dos minutos juntas” y el texto listo para compartir.
 - `galleryCaptions`: captions de las fotos, en orden.
 - `closing`: mensaje final, firma y fecha.
 
@@ -47,6 +48,8 @@ Las fotos están en `img/lima/` y se llaman `1.jpg`, `2.jpg`, `3.jpg`, etc. La g
 
 Las imágenes se cargan de a una al recorrer el carrusel; las comprobaciones de archivos usan solicitudes livianas para no descargar toda la galería al abrir la página.
 
-## Datos guardados
+## Privacidad y datos guardados
 
-El calendario, la meta y el orden de los papelitos se guardan en el navegador de ese dispositivo. No se envían a ningún servidor. Si se borran los datos del navegador o se abre el sitio desde otro teléfono, esos datos empiezan de cero.
+El orden de los papelitos y la misión del día se guardan en el navegador de ese dispositivo. No se envían a ningún servidor. Si se borran los datos del navegador o se abre el sitio desde otro teléfono, empiezan de cero.
+
+La conversación de WhatsApp usada para entender el tono no forma parte de este proyecto, no se publica y no se sube a GitHub.
