@@ -89,13 +89,28 @@ window.KAROL_CONTENT = {
       id: "reirme",
       tab: "necesito reírme",
       kicker: "Abrí en caso de seriedad excesiva",
-      title: "Boletín urgente: nació la palomapornis",
+      title: "BOLETÍN URGENTE: AVANZA EL CASO PALOMAPORNIS",
       body: [
-        "Una paloma decidió adoptar la jaula de Lima como sucursal de su casa. Lima no emitió comunicado, pero fuentes cercanas aseguran que la convivencia está siendo observada con un solo ojo y bastante criterio.",
-        "Karol, tu aporte a la ciencia fue nombrar a sus futuros bebés ‘palomapornis’. La especie todavía no fue reconocida porque las autoridades claramente tienen otras prioridades equivocadas.",
-        "Si esto no alcanza, imaginá a Lima llenando un formulario migratorio para visitar a su tía en Estados Unidos: ocupación, supervisora; motivo del viaje, chisme; bienes a declarar, tres semillas y actitud."
+        "Una paloma decidió instalarse cerca de la jaula de Lima y actuar como si pagara alquiler. La situación generó preocupación, curiosidad y absolutamente ninguna intervención de las autoridades competentes.",
+        "Lima, principal afectada y supervisora autodesignada del domicilio, observó todo con un solo ojo durante varios minutos. Ante la insistencia de la prensa, finalmente decidió emitir una declaración oficial:",
+        "“Pío pío.”",
+        "Especialistas todavía intentan determinar si se trató de una amenaza, una bienvenida o una opinión sobre la situación económica del país.",
+        "Karol, reconocida investigadora internacional, madre de Lima y residente en Estados Unidos, aportó el término científico “palomapornis” para describir a los posibles descendientes de esta unión totalmente imaginaria. La especie aún no fue reconocida porque la comunidad científica es cobarde y se niega a aceptar la verdad.",
+        "En caso de que los palomapornis nazcan, se espera que hereden:",
+        "• La capacidad de Lima para juzgar en silencio.",
+        "• El descaro de una paloma que entra donde quiere.",
+        "• La ciudadanía argentina por derecho de suelo.",
+        "• Una relación a distancia con su mamá Karol.",
+        "También se evalúa la posibilidad de que Lima viaje personalmente a Estados Unidos para informar los avances del caso. En su formulario migratorio declararía:",
+        "Ocupación: supervisora general.",
+        "Motivo del viaje: visitar a mi mamá y llevar chisme.",
+        "Bienes: tres semillas, una pluma dudosa y actitud.",
+        "¿Tiene algo más para declarar?: pío pío.",
+        "Fuentes cercanas aseguran que, pese a su negativa a dar entrevistas completas, Lima te quiere muchísimo y te extraña desde su puesto de supervisión. Al ser consultada sobre la distancia, respondió nuevamente “pío pío”, pero esta vez con sentimientos.",
+        "Su tía Barbi también confirma que te quiere un montón montonazo y que ambas esperan verte pronto, aunque solo una de las dos tenga permitido subir legalmente a un avión.",
+        "Seguiremos informando a medida que aparezcan nuevos datos o la paloma vuelva a cometer allanamiento de morada."
       ],
-      signature: "Informe redactado por Barbi. Lima se negó a declarar."
+      signature: "Informe redactado por Barbi, tía de Lima. Lima declaró, como posdata: “pío pío, te quiero”."
     }
   ],
 
