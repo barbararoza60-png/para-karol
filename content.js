@@ -15,11 +15,12 @@ window.KAROL_CONTENT = {
       kicker: "Abrí cuando por fin terminaste de trabajar",
       title: "El turno ya no entra a casa con vos",
       body: [
-        "Holi. Primero: soltá los hombros. Sí, esos que todavía están trabajando sin que nadie les pague hora extra. Llegaste hasta acá y por hoy alcanza de verdad.",
-        "No hace falta que seas simpática, eficiente ni que resuelvas una cosa más. Tomá agua, comé algo que no venga de una máquina y dejá que el día se termine. La Karol cansada también merece cuidados, incluso —y especialmente— cuando no le queda energía para pedirlos.",
-        "De este lado te estamos haciendo el aguante. Lima ya fichó la salida y yo decreto oficialmente que ahora empieza tu horario de no deberle nada a nadie."
+        "Holi! Yo sé que casi siempre te pregunto “q tal tu día?” y que muchas veces la respuesta es que fue largo, cansador o que pasaron quinientas cosas juntas.",
+        "No sé exactamente cómo habrá sido hoy, pero quería que al terminar tuvieras algo esperándote. Aunque esté lejos, quiero que sepas que te pienso, que te extraño y que estoy siempre haciéndote el aguante desde acá como puedo (?.",
+        "Admiro mucho todo lo que hacés. Sé cuánto esfuerzo ponés en todo y lo mucho que estás intentando construir la vida que querés. Estoy segura de que todo esto en algún momento va a salir bien y va a valer la pena, aunque ahora a veces se sienta eterno o medio incierto.",
+        "Ojalá pudiera darte un abrazo de verdad, pero por ahora esta página va a tener que cumplir esa función."
       ],
-      signature: "Te quiero un montón montonazo. Cerrá el turno, hermana."
+      signature: "Te quiero un montón montonazo y estoy muy orgullosa de vos, hermana. Siempre estoy de tu lado."
     },
     {
       id: "extrano-casa",
