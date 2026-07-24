@@ -149,6 +149,58 @@
   } else {
     mobileViewport.addListener(() => renderMobileView(viewFromHash()));
   }
+
+  // iOS permite arrastrar un contenedor más allá de su contenido aunque el
+  // documento esté bloqueado. Frenamos solamente ese rebote en los bordes.
+  let lastMobileTouchX = 0;
+  let lastMobileTouchY = 0;
+
+  mobileViews.forEach((view) => {
+    view.addEventListener(
+      "touchstart",
+      (event) => {
+        if (!mobileViewport.matches || event.touches.length !== 1) return;
+        lastMobileTouchX = event.touches[0].clientX;
+        lastMobileTouchY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    view.addEventListener(
+      "touchmove",
+      (event) => {
+        if (
+          !mobileViewport.matches ||
+          !view.classList.contains("is-active-view") ||
+          event.touches.length !== 1
+        ) {
+          return;
+        }
+
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - lastMobileTouchX;
+        const deltaY = touch.clientY - lastMobileTouchY;
+        lastMobileTouchX = touch.clientX;
+        lastMobileTouchY = touch.clientY;
+
+        // Los gestos horizontales de la galería siguen funcionando normalmente.
+        if (Math.abs(deltaY) <= Math.abs(deltaX)) return;
+
+        const maxScroll = Math.max(0, view.scrollHeight - view.clientHeight);
+        const pullingPastTop = deltaY > 0 && view.scrollTop <= 0;
+        const pullingPastBottom = deltaY < 0 && view.scrollTop >= maxScroll - 1;
+
+        if (
+          event.cancelable &&
+          (maxScroll <= 1 || pullingPastTop || pullingPastBottom)
+        ) {
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+  });
+
   window.addEventListener("resize", syncMobileViewportHeight, { passive: true });
   window.visualViewport?.addEventListener("resize", syncMobileViewportHeight, {
     passive: true
