@@ -233,7 +233,7 @@ window.KAROL_CONTENT = {
     },
     {
       title: "Una pregunta ridícula",
-      prompt: "Inventá una pregunta sin utilidad práctica —tipo qué trabajo tendría Lima si fuera humana— y la respondemos las dos con total seriedad.",
+      prompt: "Inventá una pregunta sin utilidad práctica (tipo qué trabajo tendría Lima si fuera humana) y la respondemos las dos con total seriedad.",
       shareText: "Misión de hermanas: pregunta ridícula del día. ¿Qué trabajo tendría Lima si fuera humana? Necesito fundamentos."
     },
     {

@@ -642,28 +642,49 @@
   const missionPrompt = $("#mission-prompt");
   const missionDone = $("#mission-done");
   const missionStatus = $("#mission-status");
-  const today = new Date();
-  const todayKey = [
-    today.getFullYear(),
-    String(today.getMonth() + 1).padStart(2, "0"),
-    String(today.getDate()).padStart(2, "0")
-  ].join("-");
 
-  function dailyMissionIndex() {
-    const seed = [...todayKey].reduce((total, character) => total + character.charCodeAt(0), 0);
+  function dateKeyFor(date) {
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0")
+    ].join("-");
+  }
+
+  let missionToday = new Date();
+  let todayKey = dateKeyFor(missionToday);
+  let missionState = storage.read(TOGETHER_KEY, {});
+
+  function dailyMissionIndex(dateKey = todayKey) {
+    const seed = [...dateKey].reduce((total, character) => total + character.charCodeAt(0), 0);
     return seed % content.togetherMissions.length;
   }
 
-  let missionState = storage.read(TOGETHER_KEY, {});
-  if (
-    missionState.date !== todayKey ||
-    !Number.isInteger(missionState.index) ||
-    missionState.index < 0 ||
-    missionState.index >= content.togetherMissions.length
-  ) {
-    missionState = { date: todayKey, index: dailyMissionIndex(), done: false };
+  function syncMissionForCurrentDay() {
+    const now = new Date();
+    const currentDateKey = dateKeyFor(now);
+    missionToday = now;
+    todayKey = currentDateKey;
+
+    if (
+      missionState.date === currentDateKey &&
+      Number.isInteger(missionState.index) &&
+      missionState.index >= 0 &&
+      missionState.index < content.togetherMissions.length
+    ) {
+      return false;
+    }
+
+    missionState = {
+      date: currentDateKey,
+      index: dailyMissionIndex(currentDateKey),
+      done: false
+    };
     storage.write(TOGETHER_KEY, missionState);
+    return true;
   }
+
+  syncMissionForCurrentDay();
 
   function currentMission() {
     return content.togetherMissions[missionState.index];
@@ -675,17 +696,18 @@
       weekday: "long",
       day: "numeric",
       month: "long"
-    }).format(today);
+    }).format(missionToday);
     missionDate.textContent = `Para hoy · ${formattedDate}`;
     missionTitle.textContent = mission.title;
     missionPrompt.textContent = mission.prompt;
-    missionDone.textContent = missionState.done ? "Hecha por hoy ♥" : "La hacemos hoy";
+    missionDone.textContent = missionState.done ? "Hecho! ♥" : "Marcarlo como hecho!";
     missionDone.setAttribute("aria-pressed", String(Boolean(missionState.done)));
     missionCard.classList.toggle("is-complete", Boolean(missionState.done));
     missionStatus.textContent = message || (missionState.done ? "Listo. Hoy el mapa quedó un poquito más chico." : "");
   }
 
   missionDone.addEventListener("click", () => {
+    syncMissionForCurrentDay();
     missionState.done = !missionState.done;
     storage.write(TOGETHER_KEY, missionState);
     renderMission(missionState.done ? "Guardada para hoy. Sin racha, sin culpa: solamente un ratito juntas." : "La dejamos pendiente, cero drama.");
@@ -693,6 +715,7 @@
   });
 
   $("#mission-next").addEventListener("click", () => {
+    syncMissionForCurrentDay();
     missionState.index = (missionState.index + 1) % content.togetherMissions.length;
     missionState.done = false;
     storage.write(TOGETHER_KEY, missionState);
@@ -722,6 +745,8 @@
   }
 
   $("#mission-share").addEventListener("click", async () => {
+    const dayChanged = syncMissionForCurrentDay();
+    if (dayChanged) renderMission("Nuevo día, nueva misión ♥");
     const mission = currentMission();
     try {
       if (navigator.share) {
@@ -739,6 +764,18 @@
         missionStatus.textContent = copied ? "Copiada para mandar por WhatsApp." : "No pude compartirla esta vez.";
       }
     }
+  });
+
+  function refreshMissionAtDayChange() {
+    if (!syncMissionForCurrentDay()) return;
+    renderMission("Nuevo día, nueva misión ♥");
+    restartAnimation(missionCard, "is-changing");
+  }
+
+  window.setInterval(refreshMissionAtDayChange, 60_000);
+  window.addEventListener("focus", refreshMissionAtDayChange);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshMissionAtDayChange();
   });
 
   renderMission();
