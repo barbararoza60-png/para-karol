@@ -60,13 +60,33 @@
   const mobileBackLabel = $("#mobile-back-label");
   let currentMobileView = "inicio";
 
+  function mobileVisibleHeight() {
+    return Math.max(
+      320,
+      Math.ceil(
+        window.visualViewport?.height ||
+        window.innerHeight ||
+        document.documentElement.clientHeight
+      )
+    );
+  }
+
+  function syncMobileViewportHeight() {
+    document.documentElement.style.setProperty(
+      "--mobile-viewport-height",
+      `${mobileVisibleHeight()}px`
+    );
+  }
+
   function viewFromHash() {
     const requested = location.hash.replace("#", "");
     return mobileViewIds.has(requested) ? requested : currentMobileView || "inicio";
   }
 
   function renderMobileView(viewId = viewFromHash()) {
+    syncMobileViewportHeight();
     if (!mobileViewport.matches) {
+      document.documentElement.classList.remove("mobile-view-mode");
       document.body.classList.remove("mobile-view-mode");
       mobileViews.forEach((view) => {
         view.classList.remove("is-active-view");
@@ -78,6 +98,7 @@
 
     const nextView = mobileViewIds.has(viewId) ? viewId : "inicio";
     currentMobileView = nextView;
+    document.documentElement.classList.add("mobile-view-mode");
     document.body.classList.add("mobile-view-mode");
     mobileViews.forEach((view) => {
       const isActive = view.id === nextView;
@@ -128,6 +149,10 @@
   } else {
     mobileViewport.addListener(() => renderMobileView(viewFromHash()));
   }
+  window.addEventListener("resize", syncMobileViewportHeight, { passive: true });
+  window.visualViewport?.addEventListener("resize", syncMobileViewportHeight, {
+    passive: true
+  });
   renderMobileView(location.hash ? viewFromHash() : "inicio");
 
   // Apariciones suaves al hacer scroll
