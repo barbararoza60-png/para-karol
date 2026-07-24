@@ -1781,28 +1781,43 @@ h3 {
   width: min(680px, calc(100% - 1.2rem));
   max-height: calc(100dvh - 1.2rem);
   padding: 0;
-  overflow: auto;
-  border: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid rgba(169, 81, 67, 0.13);
   border-radius: var(--radius-md);
   color: var(--ink);
   background: #fffaf1;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 55px rgba(132, 60, 51, 0.16);
 }
 
 .letter-dialog::backdrop {
-  background: rgba(63, 51, 47, 0.52);
-  backdrop-filter: blur(5px);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(201, 151, 167, 0.2), transparent 12rem),
+    radial-gradient(circle at 7% 90%, rgba(125, 146, 120, 0.14), transparent 14rem),
+    rgba(255, 250, 243, 0.96);
+  backdrop-filter: blur(3px);
 }
 
 .letter-dialog article {
   position: relative;
   display: grid;
+  width: 100%;
   gap: 1.2rem;
   padding: clamp(1.35rem, 5vw, 3rem);
   overflow: hidden;
   background:
-    linear-gradient(rgba(255, 250, 241, 0.93), rgba(255, 250, 241, 0.93)),
-    repeating-linear-gradient(0deg, transparent 0 31px, rgba(125, 146, 120, 0.12) 32px 33px);
+    linear-gradient(
+      90deg,
+      transparent 0 1rem,
+      rgba(201, 151, 167, 0.18) 1rem calc(1rem + 1px),
+      transparent calc(1rem + 1px)
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 31px,
+      rgba(125, 146, 120, 0.13) 31px 32px
+    ),
+    #fffaf1;
 }
 
 .letter-dialog article::before {
@@ -1822,6 +1837,7 @@ h3 {
 .letter-dialog .button {
   position: relative;
   z-index: 1;
+  min-width: 0;
 }
 
 .letter-dialog .dialog-header h2 {
