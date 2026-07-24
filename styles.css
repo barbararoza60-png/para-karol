@@ -2111,9 +2111,17 @@ h3 {
 
 .confetti-layer {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 999;
+  width: 100%;
+  height: var(--confetti-viewport-height, 100%);
+  max-height: 100%;
   overflow: hidden;
+  overflow: clip;
+  contain: strict;
+  overflow-anchor: none;
   pointer-events: none;
 }
 
@@ -2125,6 +2133,7 @@ h3 {
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(70 47 38 / 14%);
   will-change: transform;
+  overflow-anchor: none;
   animation: confetti-fall var(--fall-time) cubic-bezier(0.15, 0.75, 0.35, 1) forwards;
 }
 
@@ -2210,11 +2219,13 @@ h3 {
 @keyframes confetti-fall {
   0% { transform: translate3d(0, -20px, 0) rotate(0); opacity: 1; }
   90% {
-    transform: translate3d(var(--drift), calc(100dvh + 20px), 0) rotate(var(--spin));
+    transform:
+      translate3d(var(--drift), calc(var(--fall-distance) - 32px), 0)
+      rotate(var(--spin));
     opacity: 1;
   }
   100% {
-    transform: translate3d(var(--drift), calc(100dvh + 60px), 0) rotate(var(--spin));
+    transform: translate3d(var(--drift), var(--fall-distance), 0) rotate(var(--spin));
     opacity: 0;
   }
 }

@@ -152,9 +152,29 @@
   const confettiLayer = $("#confetti-layer");
   const confettiColors = ["#a95143", "#c997a7", "#7d9278", "#e1b268", "#eadbc9"];
 
+  function confettiViewportHeight() {
+    return Math.max(
+      320,
+      Math.ceil(
+        window.visualViewport?.height ||
+        window.innerHeight ||
+        document.documentElement.clientHeight
+      )
+    );
+  }
+
+  function syncConfettiViewport() {
+    confettiLayer.style.setProperty(
+      "--confetti-viewport-height",
+      `${confettiViewportHeight()}px`
+    );
+  }
+
   function throwConfetti(amount = 58) {
     if (reducedMotion) return;
+    syncConfettiViewport();
     const existingPieces = confettiLayer.childElementCount;
+    const fallDistance = confettiViewportHeight() + 35;
 
     for (let index = 0; index < amount; index += 1) {
       const piece = document.createElement("i");
@@ -168,6 +188,7 @@
       piece.style.setProperty("--fall-time", `${2.6 + Math.random() * 2.2}s`);
       piece.style.setProperty("--drift", `${-70 + Math.random() * 140}px`);
       piece.style.setProperty("--spin", `${360 + Math.random() * 760}deg`);
+      piece.style.setProperty("--fall-distance", `${fallDistance}px`);
       piece.style.animationDelay = `${Math.random() * 0.45}s`;
       piece.style.transform = `rotate(${Math.random() * 180}deg)`;
       piece.addEventListener("animationend", () => piece.remove(), { once: true });
@@ -175,6 +196,9 @@
     }
   }
 
+  syncConfettiViewport();
+  window.addEventListener("resize", syncConfettiViewport, { passive: true });
+  window.visualViewport?.addEventListener("resize", syncConfettiViewport, { passive: true });
   $("#confetti-again").addEventListener("click", () => throwConfetti(44));
   window.setTimeout(() => throwConfetti(), 320);
 
