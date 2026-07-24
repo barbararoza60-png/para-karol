@@ -243,7 +243,17 @@ window.KAROL_CONTENT = {
     "Supervisando el barrio y mandando amor a distancia.",
     "La mirada oficial de ‘Karol, vení pronto que tengo chisme’.",
     "Esponjosa, ligeramente despeinada y absolutamente orgullosa.",
-    "Spa de plumitas: hoy se atiende con turno previo y semillas. La palomapornis espera afuera."
+    "Spa de plumitas: hoy se atiende con turno previo y semillas. La palomapornis espera afuera.",
+    "Lima acercándose a cámara para confirmar que sí: sigue siendo la más linda de la casa.",
+    "La jefa en su oficina privada. Atiende consultas únicamente a cambio de semillas.",
+    "Primerísimo primer plano de una señorita que claramente tiene algo importantísimo para decir.",
+    "Cara oficial de “yo no fui”, presentada sin ninguna prueba que la respalde.",
+    "Agarrada a los barrotes como si Karol acabara de aparecer del otro lado de la pantalla.",
+    "Modo pancito activado: redondita, cómoda y ocupando exactamente el lugar que eligió.",
+    "Arquitecta, inspectora y destructora certificada de túneles de cartón.",
+    "Control fronterizo de Lima: documentos, semillas y motivo de la visita, por favor.",
+    "Transmitiendo desde el balcón con un informe urgente y algunas gotitas dramáticas.",
+    "Después de la lluvia: plumitas despeinadas, mirada seria y cero arrepentimientos."
   ],
   galleryExtraCaption: "Lima mandando el boletín número {n}: todo en orden, pero se aceptan mimos.",
 
