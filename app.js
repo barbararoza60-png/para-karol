@@ -757,7 +757,7 @@
     syncMissionForCurrentDay();
     missionState.done = !missionState.done;
     storage.write(TOGETHER_KEY, missionState);
-    renderMission(missionState.done ? "Guardada para hoy. Sin racha, sin culpa: solamente un ratito juntas." : "La dejamos pendiente, cero drama.");
+    renderMission(missionState.done ? "¡Guardada para hoy!" : "La dejamos pendiente, cero drama.");
     if (missionState.done) throwConfetti(24);
   });
 
