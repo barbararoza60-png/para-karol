@@ -15,9 +15,9 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=4" />
+    <link rel="stylesheet" href="./styles.css?v=5" />
     <script src="./content.js?v=11" defer></script>
-    <script src="./app.js?v=4" defer></script>
+    <script src="./app.js?v=5" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -160,26 +160,35 @@
         </div>
 
         <div class="jar-layout reveal">
-          <div id="note-jar" class="note-jar" aria-hidden="true">
-            <div class="jar-lid"></div>
-            <div class="jar-glass">
+          <button
+            id="draw-note"
+            class="note-jar"
+            type="button"
+            aria-controls="paper-note"
+            aria-label="Sacar un papelito del frasco"
+          >
+            <span class="jar-lid" aria-hidden="true"></span>
+            <span class="jar-glass" aria-hidden="true">
               <span class="paper-bit bit-one"></span>
               <span class="paper-bit bit-two"></span>
               <span class="paper-bit bit-three"></span>
               <span class="paper-bit bit-four"></span>
               <span class="paper-bit bit-five"></span>
-              <span class="jar-label">para<br />Karol</span>
-            </div>
-          </div>
+              <span class="jar-label">
+                para<br />Karol
+                <small>tocá para sacar uno</small>
+              </span>
+            </span>
+          </button>
 
           <div class="paper-note-wrap">
-            <article id="paper-note" class="paper-note" aria-live="polite">
+            <article id="paper-note" class="paper-note" aria-live="polite" aria-atomic="true" hidden>
               <span class="paper-heart" aria-hidden="true">♥</span>
-              <p id="paper-note-text">Sacá uno. Prometo que no hay ninguno que diga “seguí laburando”.</p>
+              <p id="paper-note-text"></p>
             </article>
-            <button id="draw-note" class="button button-primary" type="button">
-              Sacar un papelito
-            </button>
+            <p id="jar-repeat-hint" class="jar-repeat-hint" hidden>
+              Tocá el frasco otra vez para sacar otro.
+            </p>
             <p id="paper-note-count" class="microcopy"></p>
           </div>
         </div>

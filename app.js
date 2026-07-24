@@ -379,8 +379,11 @@
   const JAR_KEY = "paraKarol.jarDeck.v1";
   const noteText = $("#paper-note-text");
   const noteCard = $("#paper-note");
-  const noteJar = $("#note-jar");
   const noteCount = $("#paper-note-count");
+  const jarLayout = $(".jar-layout");
+  const jarRepeatHint = $("#jar-repeat-hint");
+  const drawNoteButton = $("#draw-note");
+  const noteJar = drawNoteButton;
   let noteDeck = storage
     .read(JAR_KEY, [])
     .filter((index) => Number.isInteger(index) && index >= 0 && index < content.jarNotes.length);
@@ -399,7 +402,7 @@
     }
   }
 
-  $("#draw-note").addEventListener("click", () => {
+  drawNoteButton.addEventListener("click", () => {
     let justReset = false;
     if (noteDeck.length === 0) {
       noteDeck = freshDeck();
@@ -408,6 +411,10 @@
     const deckPosition = Math.floor(Math.random() * noteDeck.length);
     const [noteIndex] = noteDeck.splice(deckPosition, 1);
     noteText.textContent = content.jarNotes[noteIndex];
+    noteCard.hidden = false;
+    jarRepeatHint.hidden = false;
+    jarLayout.classList.add("has-note");
+    drawNoteButton.setAttribute("aria-label", "Sacar otro papelito del frasco");
     storage.write(JAR_KEY, noteDeck);
     restartAnimation(noteCard, "is-new");
     restartAnimation(noteJar, "is-drawing");

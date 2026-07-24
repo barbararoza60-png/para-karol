@@ -826,14 +826,28 @@ h3 {
 
 .note-jar {
   position: relative;
+  display: block;
   width: min(250px, 67vw);
   margin-inline: auto;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
   filter: drop-shadow(0 24px 25px rgba(90, 62, 52, 0.14));
+  transition: filter 300ms ease, opacity 300ms ease, transform 300ms ease;
+}
+
+.note-jar:focus-visible {
+  outline: 3px solid var(--terracotta);
+  outline-offset: 9px;
+  border-radius: 30px;
 }
 
 .jar-lid {
   position: relative;
   z-index: 2;
+  display: block;
   width: 70%;
   height: 37px;
   margin-inline: auto;
@@ -844,6 +858,7 @@ h3 {
 
 .jar-glass {
   position: relative;
+  display: block;
   height: 285px;
   margin-top: -3px;
   overflow: hidden;
@@ -882,6 +897,18 @@ h3 {
   transform: translate(-50%, -50%) rotate(-3deg);
 }
 
+.jar-label small {
+  display: block;
+  margin-top: 0.55rem;
+  color: var(--terracotta-dark);
+  font-family: var(--sans);
+  font-size: 0.57rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .paper-bit {
   position: absolute;
   bottom: 9%;
@@ -899,7 +926,7 @@ h3 {
 .bit-five { right: 23%; bottom: 28%; background: #e9d9b9; transform: rotate(19deg); }
 
 .note-jar.is-drawing {
-  animation: jar-wiggle 580ms ease;
+  animation: jar-pop 650ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
 }
 
 .paper-note-wrap {
@@ -951,12 +978,16 @@ h3 {
   transform: rotate(8deg);
 }
 
-.paper-note-wrap .button {
-  margin-top: 1.6rem;
+.paper-note.is-new {
+  animation: paper-reveal 650ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
 }
 
-.paper-note.is-new {
-  animation: paper-reveal 580ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
+.jar-repeat-hint {
+  margin: 1rem 0 0;
+  color: var(--terracotta-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
 }
 
 .calm-section {
@@ -1881,16 +1912,15 @@ h3 {
   100% { transform: translate3d(var(--drift), 110vh, 0) rotate(var(--spin)); opacity: 0.9; }
 }
 
-@keyframes jar-wiggle {
-  0%, 100% { transform: rotate(0); }
-  20% { transform: rotate(-3deg); }
-  40% { transform: rotate(3deg); }
-  60% { transform: rotate(-2deg); }
-  80% { transform: rotate(1deg); }
+@keyframes jar-pop {
+  0%, 100% { transform: scale(1) rotate(0); }
+  28% { transform: scale(1.12) rotate(-2deg); }
+  52% { transform: scale(0.97) rotate(2deg); }
+  76% { transform: scale(1.06) rotate(-1deg); }
 }
 
 @keyframes paper-reveal {
-  0% { opacity: 0; transform: translateY(25px) rotate(2deg) scale(0.95); }
+  0% { opacity: 0; transform: translateY(95px) rotate(4deg) scale(0.38); }
   100% { opacity: 1; transform: translateY(0) rotate(-1deg) scale(1); }
 }
 
@@ -2116,6 +2146,86 @@ h3 {
   body.mobile-view-mode .section-heading > p:last-child {
     font-size: 0.94rem;
     line-height: 1.45;
+  }
+
+  body.mobile-view-mode #papelitos {
+    overflow-y: hidden;
+  }
+
+  body.mobile-view-mode #papelitos .section-heading {
+    margin-bottom: 0.65rem;
+  }
+
+  body.mobile-view-mode #papelitos .section-heading h2 {
+    font-size: clamp(1.8rem, 8.8vw, 2.45rem);
+  }
+
+  body.mobile-view-mode #papelitos .section-heading > p:last-child {
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+
+  body.mobile-view-mode .jar-layout {
+    position: relative;
+    display: grid;
+    min-height: clamp(300px, calc(100dvh - 255px), 355px);
+    place-items: center;
+    gap: 0;
+  }
+
+  body.mobile-view-mode .note-jar {
+    z-index: 1;
+    width: min(220px, 59vw);
+  }
+
+  body.mobile-view-mode .jar-glass {
+    height: 250px;
+  }
+
+  body.mobile-view-mode .jar-layout.has-note .note-jar {
+    opacity: 0.18;
+    transform: scale(1.08);
+  }
+
+  body.mobile-view-mode .paper-note-wrap {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    padding-bottom: 2.9rem;
+    pointer-events: none;
+  }
+
+  body.mobile-view-mode .paper-note {
+    width: min(300px, 86vw);
+    min-height: 205px;
+    padding: 2rem 1.3rem;
+  }
+
+  body.mobile-view-mode .paper-note p {
+    font-size: clamp(1.12rem, 5.5vw, 1.45rem);
+    line-height: 1.32;
+  }
+
+  body.mobile-view-mode .jar-repeat-hint,
+  body.mobile-view-mode .paper-note-wrap .microcopy {
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  body.mobile-view-mode .jar-repeat-hint {
+    bottom: 1.65rem;
+  }
+
+  body.mobile-view-mode .paper-note-wrap .microcopy {
+    bottom: 0.15rem;
+    color: var(--muted);
+    font-size: 0.7rem;
   }
 
   body.mobile-view-mode .letters-layout,
