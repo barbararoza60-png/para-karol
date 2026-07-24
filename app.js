@@ -779,6 +779,25 @@
   let galleryOrder = [];
   let galleryIndex = 0;
   let pointerStartX = null;
+  let galleryEffectDeck = [];
+  let lastGalleryEffect = -1;
+  let galleryEffectRun = 0;
+
+  const galleryEffects = [
+    { className: "is-flapping", status: "Frrr, frrr: Lima mandó un aleteo internacional." },
+    { className: "is-shaking", status: "Lima activó el modo licuadora por motivos científicos." },
+    { className: "is-flying", status: "Lima salió volando a llevar un chisme y ya volvió." },
+    { className: "is-rocketing", status: "Despegue autorizado: Lima fue al espacio y regresó para la foto." },
+    { className: "is-spinning", status: "Giro reglamentario de supervisora general." },
+    { className: "is-bouncing", status: "Lima rebotó de emoción. El noticiero continúa." },
+    { className: "is-zooming", status: "Primerísimo primer plano: nivel de drama completamente necesario." },
+    { className: "is-flipping", status: "Lima hizo una pirueta que su seguro no cubre." },
+    { className: "is-teleporting", status: "Lima se teletransportó. La paloma es la principal sospechosa." },
+    { className: "is-tiny", status: "Lima se hizo diminuta para entrar en tu bolsillo un segundo." },
+    { className: "is-wobbling", status: "Se detectó una inestabilidad de pajarito muy seria." },
+    { className: "is-dramatic", status: "Entrada dramática de Lima: cero contexto, toda la actitud." }
+  ];
+  const galleryEffectClasses = galleryEffects.map((effect) => effect.className);
 
   function galleryPath(index) {
     return `./img/lima/${index + 1}.jpg`;
@@ -802,6 +821,59 @@
     }
     storage.write(GALLERY_FIRST_KEY, order[0]);
     return order;
+  }
+
+  function nextGalleryEffect() {
+    if (galleryEffectDeck.length === 0) {
+      galleryEffectDeck = galleryEffects.map((_, index) => index);
+      for (let index = galleryEffectDeck.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [galleryEffectDeck[index], galleryEffectDeck[randomIndex]] = [
+          galleryEffectDeck[randomIndex],
+          galleryEffectDeck[index]
+        ];
+      }
+      if (
+        galleryEffectDeck.length > 1 &&
+        galleryEffectDeck[galleryEffectDeck.length - 1] === lastGalleryEffect
+      ) {
+        [galleryEffectDeck[0], galleryEffectDeck[galleryEffectDeck.length - 1]] = [
+          galleryEffectDeck[galleryEffectDeck.length - 1],
+          galleryEffectDeck[0]
+        ];
+      }
+    }
+
+    const effectIndex = galleryEffectDeck.pop();
+    lastGalleryEffect = effectIndex;
+    return galleryEffects[effectIndex];
+  }
+
+  function playGalleryEffect() {
+    if (reducedMotion) {
+      galleryFlapStatus.textContent = "Lima recibió el toque y respondió: pío pío.";
+      window.setTimeout(() => {
+        galleryFlapStatus.textContent = "";
+      }, 1200);
+      return;
+    }
+
+    const effect = nextGalleryEffect();
+    const effectRun = ++galleryEffectRun;
+    galleryPolaroid.classList.remove(...galleryEffectClasses);
+    void galleryPolaroid.offsetWidth;
+    galleryPolaroid.classList.add(effect.className);
+    galleryFlapStatus.textContent = effect.status;
+
+    galleryPolaroid.addEventListener(
+      "animationend",
+      () => {
+        if (effectRun !== galleryEffectRun) return;
+        galleryPolaroid.classList.remove(effect.className);
+        galleryFlapStatus.textContent = "";
+      },
+      { once: true }
+    );
   }
 
   function renderGalleryDots() {
@@ -861,13 +933,7 @@
   $("#gallery-prev").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
   $("#gallery-next").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
 
-  galleryPolaroid.addEventListener("click", () => {
-    restartAnimation(galleryPolaroid, "is-flapping");
-    galleryFlapStatus.textContent = "Frrr, frrr: Lima mandó un aleteo internacional.";
-    window.setTimeout(() => {
-      galleryFlapStatus.textContent = "";
-    }, 1800);
-  });
+  galleryPolaroid.addEventListener("click", playGalleryEffect);
 
   galleryStage.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
