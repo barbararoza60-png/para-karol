@@ -139,7 +139,17 @@ window.KAROL_CONTENT = {
     "Porque tus logros no son casualidad: hay coraje, cansancio, constancia y un montón de vos detrás.",
     "Gracias por enseñarme que estar lejos no es lo mismo que estar ausente.",
     "Porque con vos puedo ser intensa, ridícula, sensible y todo el combo sin pedir disculpas.",
-    "Porque sos mi hermana. El contrato es vitalicio, pero por suerte también es de las mejores cosas que me tocaron."
+    "Porque sos mi hermana. El contrato es vitalicio, pero por suerte también es de las mejores cosas que me tocaron.",
+    "Porque te animaste a empezar de cero más veces de las que la mayoría se animaría una sola.",
+    "Porque tenés una capacidad increíble para adaptarte sin dejar de ser vos.",
+    "Porque siempre encontrás alguna manera, incluso cuando el plan original se va completamente a la mierda.",
+    "Porque convertís cualquier lugar en un hogar con personalidad.",
+    "Porque sos inteligente de esa forma práctica que mira un problema y empieza a resolverlo.",
+    "Porque tenés un humor capaz de convertir una simple paloma en una nueva especie científica.",
+    "Porque sos sensible y cariñosa, aunque muchas veces lo demuestres mediante soluciones y recetas.",
+    "Porque construiste una vida increíble sin esperar a sentirte totalmente preparada.",
+    "Porque dejás una marca en cada lugar y en cada persona que forma parte de tu vida.",
+    "Porque admiro muchísimo la persona en la que te convertiste y todo lo que todavía te queda por descubrir."
   ],
 
   affirmations: [
