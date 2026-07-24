@@ -202,9 +202,9 @@ window.KAROL_CONTENT = {
       shareText: "Misión de hermanas: cinco minutos haciendo cada una una mini cosa, pero juntas. Decime cuándo arrancamos ⏱️"
     },
     {
-      title: "Informe Lima",
-      prompt: "Pedime el último parte de Lima y yo te mando foto o chisme fresco. Si aparece la paloma, cuenta como edición especial.",
-      shareText: "Solicito el informe Lima del día. Bonus obligatorio si hubo actividad palomapornis 🐦"
+      title: "Últimas noticias de Lima",
+      prompt: "Pedime la última novedad de Lima y yo te mando una foto o un chisme fresco. Si aparece la paloma, cuenta como edición especial.",
+      shareText: "Misión de hermanas: solicito las últimas noticias de Lima. Bonus obligatorio si hubo actividad palomapornis 🐦"
     },
     {
       title: "El detalle que nadie vio",
@@ -249,9 +249,18 @@ window.KAROL_CONTENT = {
 
   closing: {
     title: "Ojalá este rinconcito te haga un poquito de compañía",
-    message:
-      "No reemplaza tenerte acá, ni una charla larga, ni un abrazo de esos que acomodan todo. Pero quería que tuvieras algo hecho para vos: cartas para abrir cuando haga falta, pausas para los días largos y pequeñas excusas para seguir compartiendo la vida. Estoy orgullosa de todo lo que construiste, incluso de lo que todavía no alcanzás a ver. Feliz vuelta al sol, hermana. Te quiero un montón montonazo.",
-    signature: "Con todo mi amor,\ntu hermana (y Lima, que claramente supervisó).",
+    message: [
+      "Hice todo esto porque quería que tuvieras algo mío allá con vos. Algo a lo que pudieras volver cuando extrañes, cuando estés cansada, cuando dudes de vos, cuando necesites que alguien te banque o cuando tengas algo lindo para contar. No reemplaza tenerte acá, una charla larga ni uno de esos abrazos que acomodan un poco todo, pero espero que consiga acercarme aunque sea un poquito.",
+      "También quería aprovechar esta última carta para decirte algo que quizás no te digo lo suficiente: gracias.",
+      "Yo era muy chica cuando vos decidiste hacerme un lugar tan grande en tu vida. Tenía diez años y, de alguna manera, me adoptaste. No porque tuvieras que hacerlo, sino porque me elegiste. Me cuidaste, me defendiste, me escuchaste, me enseñaste un millón de cosas y me bancaste incluso durante etapas en las que probablemente yo era bastante difícil de bancar.",
+      "Crecí sabiendo que te tenía a vos. Que podía preguntarte algo, pedirte ayuda, contarte una pavada o aparecer con algún quilombo y que, de una forma u otra, ibas a estar. Hay muchísimas cosas de la persona que soy hoy que existen porque vos estuviste ahí mientras yo crecía. Me diste confianza, herramientas, cariño y un lugar seguro mucho antes de que yo supiera valorar todo lo que eso significaba.",
+      "A veces siento que te debo una parte enorme de mí, pero no quiero que eso suene como una deuda. Es más bien gratitud. La suerte inmensa de poder mirar mi vida y reconocer todo lo que dejaste en ella. Sos mi hermana, pero también fuiste un poco guía, refugio, cómplice y familia elegida, incluso cuando ya éramos familia desde antes.",
+      "Por eso quiero que sepas que yo también estoy acá para vos. No puedo prometer tener siempre la solución ni saber exactamente qué decir, pero sí puedo prometerte que voy a escucharte, creerte, festejarte, acompañarte y bancarte. En las cosas grandes y en las chiquitas. Cuando todo vaya bien y cuando no tengas idea de qué hacer. No porque tenga que devolverte nada, sino porque te quiero y porque no imagino mi vida sin estar de tu lado.",
+      "Estoy profundamente orgullosa de vos. De la vida que construiste, de todo lo que atravesaste para llegar hasta ella y también de las partes que todavía estás descubriendo. Espero que este nuevo año te devuelva un poquito de todo el amor, el esfuerzo y el cuidado que vos pusiste siempre en los demás.",
+      "Gracias por haberme elegido tantas veces. Gracias por haber sido mi hermana de todas las maneras posibles. Y gracias por seguir estando, incluso desde tan lejos.",
+      "Feliz vuelta al sol, Karol. Te extraño, te admiro y te quiero un montón montonazo. Mucho más de lo que sé poner en una página."
+    ],
+    signature: "Con todo mi amor,\ntu hermana Barbi\ny Lima, que claramente supervisó todo y declaró “pío pío” en señal de aprobación.",
     date: "24 de julio de 2026"
   }
 };

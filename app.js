@@ -38,7 +38,15 @@
   $("#hero-message").textContent = content.hero.message;
   $("#hero-keepsake-text").textContent = content.hero.keepsake;
   $("#closing-heading").textContent = content.closing.title;
-  $("#closing-message").textContent = content.closing.message;
+  const closingMessage = $("#closing-message");
+  const closingParagraphs = Array.isArray(content.closing.message)
+    ? content.closing.message
+    : [content.closing.message];
+  closingParagraphs.forEach((paragraph) => {
+    const element = document.createElement("p");
+    element.textContent = paragraph;
+    closingMessage.append(element);
+  });
   $("#closing-signature").textContent = content.closing.signature;
   $("#closing-date").textContent = content.closing.date;
   $("#closing-date").dateTime = "2026-07-24";

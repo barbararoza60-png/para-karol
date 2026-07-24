@@ -1609,6 +1609,14 @@ h3 {
   font-size: clamp(1.04rem, 2.7vw, 1.2rem);
 }
 
+.closing-message p {
+  margin: 0;
+}
+
+.closing-message p + p {
+  margin-top: 1.2rem;
+}
+
 .closing-signature {
   margin: 2.2rem 0 0.5rem;
   font-family: var(--serif);
