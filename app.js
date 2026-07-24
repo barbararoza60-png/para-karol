@@ -151,17 +151,6 @@
   // Confetti liviano, sin librerías
   const confettiLayer = $("#confetti-layer");
   const confettiColors = ["#a95143", "#c997a7", "#7d9278", "#e1b268", "#eadbc9"];
-  const maxConfettiPieces = 1000;
-
-  function pruneSettledConfetti() {
-    const extraPieces = confettiLayer.childElementCount - maxConfettiPieces;
-    if (extraPieces <= 0) return;
-
-    const settledPieces = confettiLayer.querySelectorAll(".confetti-piece.is-settled");
-    for (let index = 0; index < Math.min(extraPieces, settledPieces.length); index += 1) {
-      settledPieces[index].remove();
-    }
-  }
 
   function throwConfetti(amount = 58) {
     if (reducedMotion) return;
@@ -169,10 +158,6 @@
 
     for (let index = 0; index < amount; index += 1) {
       const piece = document.createElement("i");
-      const pileDepth = Math.min(
-        58,
-        7 + Math.floor((existingPieces + index) / 32) * 1.5 + Math.random() * 24
-      );
 
       piece.className = "confetti-piece";
       piece.style.left = `${1 + Math.random() * 98}%`;
@@ -183,17 +168,9 @@
       piece.style.setProperty("--fall-time", `${2.6 + Math.random() * 2.2}s`);
       piece.style.setProperty("--drift", `${-70 + Math.random() * 140}px`);
       piece.style.setProperty("--spin", `${360 + Math.random() * 760}deg`);
-      piece.style.setProperty("--landing", `calc(100vh - ${3 + pileDepth}px)`);
       piece.style.animationDelay = `${Math.random() * 0.45}s`;
       piece.style.transform = `rotate(${Math.random() * 180}deg)`;
-      piece.addEventListener(
-        "animationend",
-        () => {
-          piece.classList.add("is-settled");
-          pruneSettledConfetti();
-        },
-        { once: true }
-      );
+      piece.addEventListener("animationend", () => piece.remove(), { once: true });
       confettiLayer.append(piece);
     }
   }

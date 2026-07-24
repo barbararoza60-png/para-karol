@@ -2128,10 +2128,6 @@ h3 {
   animation: confetti-fall var(--fall-time) cubic-bezier(0.15, 0.75, 0.35, 1) forwards;
 }
 
-.confetti-piece.is-settled {
-  will-change: auto;
-}
-
 .sky-motif {
   position: fixed;
   inset: 0;
@@ -2213,19 +2209,13 @@ h3 {
 
 @keyframes confetti-fall {
   0% { transform: translate3d(0, -20px, 0) rotate(0); opacity: 1; }
-  87% {
-    transform: translate3d(var(--drift), var(--landing), 0) rotate(var(--spin));
-    opacity: 1;
-  }
-  94% {
-    transform:
-      translate3d(calc(var(--drift) - 5px), calc(var(--landing) - 10px), 0)
-      rotate(calc(var(--spin) + 16deg));
+  90% {
+    transform: translate3d(var(--drift), calc(100dvh + 20px), 0) rotate(var(--spin));
     opacity: 1;
   }
   100% {
-    transform: translate3d(var(--drift), var(--landing), 0) rotate(var(--spin));
-    opacity: 1;
+    transform: translate3d(var(--drift), calc(100dvh + 60px), 0) rotate(var(--spin));
+    opacity: 0;
   }
 }
 
