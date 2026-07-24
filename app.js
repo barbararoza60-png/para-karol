@@ -389,8 +389,8 @@
   const noteCard = $("#paper-note");
   const noteCount = $("#paper-note-count");
   const jarLayout = $(".jar-layout");
-  const jarRepeatHint = $("#jar-repeat-hint");
   const drawNoteButton = $("#draw-note");
+  const saveNoteButton = $("#save-note");
   const noteJar = drawNoteButton;
   let noteDeck = storage
     .read(JAR_KEY, [])
@@ -411,6 +411,8 @@
   }
 
   drawNoteButton.addEventListener("click", () => {
+    if (jarLayout.classList.contains("has-note")) return;
+
     let justReset = false;
     if (noteDeck.length === 0) {
       noteDeck = freshDeck();
@@ -419,14 +421,29 @@
     const deckPosition = Math.floor(Math.random() * noteDeck.length);
     const [noteIndex] = noteDeck.splice(deckPosition, 1);
     noteText.textContent = content.jarNotes[noteIndex];
-    noteCard.hidden = false;
-    jarRepeatHint.hidden = false;
-    jarLayout.classList.add("has-note");
-    drawNoteButton.setAttribute("aria-label", "Sacar otro papelito del frasco");
+    drawNoteButton.disabled = true;
     storage.write(JAR_KEY, noteDeck);
-    restartAnimation(noteCard, "is-new");
     restartAnimation(noteJar, "is-drawing");
     updateNoteCount(justReset);
+
+    window.setTimeout(() => {
+      noteCard.hidden = false;
+      jarLayout.classList.add("has-note");
+      restartAnimation(noteCard, "is-new");
+      saveNoteButton.focus({ preventScroll: true });
+    }, 280);
+  });
+
+  saveNoteButton.addEventListener("click", () => {
+    noteCard.classList.add("is-saving");
+    window.setTimeout(() => {
+      noteCard.hidden = true;
+      noteCard.classList.remove("is-new", "is-saving");
+      jarLayout.classList.remove("has-note");
+      drawNoteButton.disabled = false;
+      drawNoteButton.setAttribute("aria-label", "Sacar un papelito del frasco");
+      drawNoteButton.focus({ preventScroll: true });
+    }, 260);
   });
 
   if (noteDeck.length) updateNoteCount();

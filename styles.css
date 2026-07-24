@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -940,7 +944,9 @@ h3 {
   max-width: 580px;
   min-height: 220px;
   display: grid;
-  place-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 1.5rem;
   padding: clamp(2rem, 7vw, 3.6rem);
   border: 1px solid rgba(169, 81, 67, 0.13);
   border-radius: 4px 25px 5px 18px;
@@ -982,12 +988,15 @@ h3 {
   animation: paper-reveal 650ms cubic-bezier(0.2, 0.9, 0.25, 1.2);
 }
 
-.jar-repeat-hint {
-  margin: 1rem 0 0;
-  color: var(--terracotta-dark);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+.paper-note.is-saving {
+  animation: paper-save 260ms ease forwards;
+}
+
+.jar-save-button {
+  position: relative;
+  z-index: 2;
+  min-width: 190px;
+  padding: 0.8rem 1.35rem;
 }
 
 .calm-section {
@@ -1932,6 +1941,11 @@ h3 {
   100% { opacity: 1; transform: translateY(0) rotate(-1deg) scale(1); }
 }
 
+@keyframes paper-save {
+  from { opacity: 1; transform: translateY(0) rotate(-1deg) scale(1); }
+  to { opacity: 0; transform: translateY(70px) rotate(3deg) scale(0.45); }
+}
+
 @keyframes orbit {
   to { transform: rotate(360deg) translateX(115px) rotate(-360deg); }
 }
@@ -2191,8 +2205,8 @@ h3 {
   }
 
   body.mobile-view-mode .jar-layout.has-note .note-jar {
-    opacity: 0.18;
-    transform: scale(1.08);
+    opacity: 0;
+    transform: scale(0.86);
   }
 
   body.mobile-view-mode .paper-note-wrap {
@@ -2202,14 +2216,15 @@ h3 {
     display: grid;
     align-content: center;
     justify-items: center;
-    padding-bottom: 2.9rem;
+    padding-bottom: 2rem;
     pointer-events: none;
   }
 
   body.mobile-view-mode .paper-note {
     width: min(300px, 86vw);
-    min-height: 205px;
-    padding: 2rem 1.3rem;
+    min-height: 245px;
+    padding: 2rem 1.3rem 1.35rem;
+    pointer-events: auto;
   }
 
   body.mobile-view-mode .paper-note p {
@@ -2217,17 +2232,12 @@ h3 {
     line-height: 1.32;
   }
 
-  body.mobile-view-mode .jar-repeat-hint,
   body.mobile-view-mode .paper-note-wrap .microcopy {
     position: absolute;
     right: 0;
     left: 0;
     margin: 0;
     text-align: center;
-  }
-
-  body.mobile-view-mode .jar-repeat-hint {
-    bottom: 1.65rem;
   }
 
   body.mobile-view-mode .paper-note-wrap .microcopy {
