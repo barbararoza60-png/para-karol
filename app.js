@@ -745,7 +745,9 @@
   const galleryStage = $("#gallery-stage");
   const galleryDots = $("#gallery-dots");
   const galleryFlapStatus = $("#gallery-flap-status");
+  const GALLERY_FIRST_KEY = "paraKarol.galleryFirst.v1";
   let galleryCount = Math.max(content.galleryCaptions.length, 1);
+  let galleryOrder = [];
   let galleryIndex = 0;
   let pointerStartX = null;
 
@@ -755,6 +757,22 @@
 
   function extraGalleryCaption(number) {
     return content.galleryExtraCaption.replace("{n}", number);
+  }
+
+  function shuffleGallery(count) {
+    const order = Array.from({ length: count }, (_, index) => index);
+    for (let index = order.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
+    }
+
+    const previousFirst = storage.read(GALLERY_FIRST_KEY, -1);
+    if (order.length > 1 && order[0] === previousFirst) {
+      const swapIndex = 1 + Math.floor(Math.random() * (order.length - 1));
+      [order[0], order[swapIndex]] = [order[swapIndex], order[0]];
+    }
+    storage.write(GALLERY_FIRST_KEY, order[0]);
+    return order;
   }
 
   function renderGalleryDots() {
@@ -771,10 +789,11 @@
 
   function showGalleryImage(index) {
     galleryIndex = (index + galleryCount) % galleryCount;
+    const imageIndex = galleryOrder[galleryIndex] ?? galleryIndex;
     galleryImage.classList.add("is-loading");
-    galleryImage.src = galleryPath(galleryIndex);
-    galleryImage.alt = `Lima, el pajarito de la familia, en la foto ${galleryIndex + 1}`;
-    galleryCaption.textContent = content.galleryCaptions[galleryIndex] || extraGalleryCaption(galleryIndex + 1);
+    galleryImage.src = galleryPath(imageIndex);
+    galleryImage.alt = `Lima, el pajarito de la familia, en la foto ${imageIndex + 1}`;
+    galleryCaption.textContent = content.galleryCaptions[imageIndex] || extraGalleryCaption(imageIndex + 1);
     galleryCounter.textContent = `${galleryIndex + 1} / ${galleryCount}`;
     $$(".gallery-dot", galleryDots).forEach((dot, dotIndex) => {
       dot.classList.toggle("is-active", dotIndex === galleryIndex);
@@ -789,6 +808,7 @@
 
   async function discoverGallery() {
     if (location.protocol === "file:") {
+      galleryOrder = shuffleGallery(galleryCount);
       renderGalleryDots();
       showGalleryImage(0);
       return;
@@ -804,6 +824,7 @@
       }
     }
     if (found > 0) galleryCount = found;
+    galleryOrder = shuffleGallery(galleryCount);
     renderGalleryDots();
     showGalleryImage(0);
   }
