@@ -267,160 +267,160 @@ window.KAROL_CONTENT = {
   ],
   galleryAlterEgos: [
     {
-      label: "EVIL LIMA",
-      message: "No me mires, humana. Estoy calculando cosas.",
+      label: "LIMA MODO NO MOLESTAR",
+      message: "No estoy durmiendo, humana. Estoy cargando energía para seguir supervisándote.",
       color: "#3d263f",
       accent: "#ed6678",
       ink: "#fff2ed",
       filter: "contrast(1.2) saturate(0.78) hue-rotate(326deg)"
     },
     {
-      label: "LIMA FELIZ",
-      message: "Te quiero, humana. Pero no te acostumbres a que lo diga.",
+      label: "LIMA RECIÉN BAÑADA",
+      message: "Me bañé sola y quedé divina. No acepto opiniones sobre el peinado.",
       color: "#f6d889",
       accent: "#e98958",
       ink: "#5a382f",
       filter: "brightness(1.08) saturate(1.24)"
     },
     {
-      label: "LIMA SOSPECHOSA",
-      message: "¿Y vos por qué tocaste la pantalla? Declarate.",
+      label: "LIMA MOJADA Y OFENDIDA",
+      message: "¿Quién autorizó esta foto con el plumaje así, humana?",
       color: "#667665",
       accent: "#d9c28e",
       ink: "#fff8e9",
       filter: "contrast(1.14) saturate(0.82) sepia(0.16)"
     },
     {
-      label: "LIMA DORMIDA",
-      message: "Cinco minutos más y después superviso.",
+      label: "LIMA MODELO",
+      message: "Este es mi perfil bueno, humana. El otro también.",
       color: "#a99ab9",
       accent: "#ead7dd",
       ink: "#392f46",
       filter: "brightness(0.94) saturate(0.78)"
     },
     {
-      label: "LIMA HAMBRIENTA",
-      message: "Esta interacción cuesta tres semillas. Gracias.",
+      label: "EVIL LIMA",
+      message: "Abrime la puerta, humana. Prometo portarme… sospechosamente bien.",
       color: "#bd694e",
       accent: "#f3c871",
       ink: "#fff6df",
       filter: "contrast(1.08) saturate(1.3)"
     },
     {
-      label: "LIMA JEFA",
-      message: "Silencio. La supervisora general está pensando.",
+      label: "LIMA PRISIONERA",
+      message: "Karol, sacame de acá. Mis abogados ya fueron notificados.",
       color: "#325f61",
       accent: "#efb970",
       ink: "#f5fff9",
       filter: "contrast(1.16) saturate(0.92)"
     },
     {
-      label: "LIMA MIMOSA",
-      message: "Te extrañé, humana. Vení a tocarme la patita.",
+      label: "LIMA CHUSMA",
+      message: "Bajá la voz, humana. Estoy escuchando el chisme del balcón.",
       color: "#dfafb7",
       accent: "#9c5363",
       ink: "#512f3a",
       filter: "brightness(1.06) saturate(1.08)"
     },
     {
-      label: "LIMA DRAMÁTICA",
-      message: "Todo es terrible. Igual estoy divina.",
+      label: "LIMA PERIODISTA",
+      message: "Último momento: te extraño, humana. Seguiremos informando.",
       color: "#59465f",
       accent: "#df9ba9",
       ink: "#fff1f3",
       filter: "contrast(1.22) saturate(0.92)"
     },
     {
-      label: "LIMA CAOS",
-      message: "No rompí nada. Y si rompí algo, ya estaba así.",
+      label: "LIMA POSLLUVIA",
+      message: "No estoy despeinada, humana. Es una decisión estética poslluvia.",
       color: "#7c8e55",
       accent: "#f0a85e",
       ink: "#fffbe8",
       filter: "contrast(1.1) saturate(1.35) hue-rotate(8deg)"
     },
     {
-      label: "LIMA ZEN",
-      message: "Pío, respiro, pío. Problema resuelto.",
+      label: "LIMA EN EL SPA",
+      message: "No me mires, humana. Reservé el spa para uso privado.",
       color: "#8bb3a2",
       accent: "#f3e4b7",
       ink: "#27483f",
       filter: "brightness(1.04) saturate(0.82)"
     },
     {
-      label: "LIMA DETECTIVE",
-      message: "La paloma sabe demasiado. Caso abierto.",
+      label: "LIMA PRIMERÍSIMO PLANO",
+      message: "Más cerca, humana. Creo que todavía no viste bien mi cara.",
       color: "#665a4b",
       accent: "#d4aa67",
       ink: "#fff6df",
       filter: "sepia(0.3) contrast(1.18) saturate(0.8)"
     },
     {
-      label: "LIMA DIVA",
-      message: "Mi mejor ángulo es todos. Siguiente pregunta.",
+      label: "LIMA VIGILANTE",
+      message: "Te estoy viendo desde acá, humana. No hagas ninguna pavada.",
       color: "#b06e91",
       accent: "#f3c8d7",
       ink: "#fff3f8",
       filter: "brightness(1.08) saturate(1.22) contrast(1.06)"
     },
     {
-      label: "BABY LIMA",
-      message: "Soy chiquita. Necesito atención inmediatamente.",
+      label: "LIMA GRITONA",
+      message: "¡KAROL! ¿ME ESCUCHÁS O GRITO MÁS FUERTE?",
       color: "#b8d3b2",
       accent: "#f6d2a6",
       ink: "#36503a",
       filter: "brightness(1.12) saturate(0.92)"
     },
     {
-      label: "LIMA OFENDIDA",
-      message: "Hoy no atiendo consultas. Dejá las semillas y retirate.",
+      label: "LIMA YO NO FUI",
+      message: "Yo no fui, humana. Y no pienso responder más preguntas.",
       color: "#824c4f",
       accent: "#dda27c",
       ink: "#fff3e8",
       filter: "contrast(1.18) saturate(0.86)"
     },
     {
-      label: "LIMA CIENTÍFICA",
-      message: "El proyecto palomapornis avanza según lo previsto.",
+      label: "LIMA EN FUGA",
+      message: "Un barrote más y recupero mi libertad, humana.",
       color: "#47747c",
       accent: "#b8dde0",
       ink: "#efffff",
       filter: "contrast(1.08) saturate(0.76) hue-rotate(12deg)"
     },
     {
-      label: "LIMA DE FIESTA",
-      message: "Subí el volumen, humana. Hoy se grita.",
+      label: "LIMA PANCITO",
+      message: "No estoy tirada, humana. Este cartón fue elegido por ergonomía.",
       color: "#d57b53",
       accent: "#f5d66f",
       ink: "#4e3029",
       filter: "brightness(1.08) saturate(1.42)"
     },
     {
-      label: "LIMA ENAMORADA",
-      message: "Te quiero un montón montonazo, mamá humana.",
+      label: "LIMA ARQUITECTA",
+      message: "No es cartón roto, humana. Es un túnel de diseño exclusivo.",
       color: "#c87887",
       accent: "#ffd2d7",
       ink: "#fff8f3",
       filter: "brightness(1.08) saturate(1.12)"
     },
     {
-      label: "LIMA DUENDE",
-      message: "Son las tres de la mañana y tengo ideas.",
+      label: "LIMA ADUANA",
+      message: "Documentos, semillas y motivo de la visita, humana.",
       color: "#425d3d",
       accent: "#bdcf6c",
       ink: "#f5ffe8",
       filter: "contrast(1.22) saturate(1.18) hue-rotate(18deg)"
     },
     {
-      label: "LIMA VALIENTE",
-      message: "No tengo miedo. Tengo volumen.",
+      label: "LIMA BAJO LA LLUVIA",
+      message: "Está lloviendo, humana. Igual salí porque el barrio no se supervisa solo.",
       color: "#b25b3d",
       accent: "#f4ba67",
       ink: "#fff6e8",
       filter: "contrast(1.14) saturate(1.32)"
     },
     {
-      label: "LIMA DESDE CASA",
-      message: "Desde acá te mando un pío que cruza el mapa entero.",
+      label: "LIMA EMPAPADA",
+      message: "Sí, estoy mojada. No, no perdí la dignidad. Mandame un mimo, humana.",
       color: "#6f8f86",
       accent: "#f0c0a0",
       ink: "#f8fffb",
