@@ -281,6 +281,7 @@ window.KAROL_CONTENT = {
       "Feliz vuelta al sol, Karol. Te extraño, te admiro y te quiero un montón montonazo. Mucho más de lo que sé poner en una página."
     ],
     signature: "Con todo mi amor,\ntu hermana Barbi\ny Lima, que claramente supervisó todo y declaró “pío pío” en señal de aprobación.",
-    date: "24 de julio de 2026"
+    date: "24 de julio de 2026",
+    postscript: "PD: Gracias por elegirme cuando era una nena. Ojalá esta página sea una forma chiquita de seguir eligiéndote yo a vos."
   }
 };

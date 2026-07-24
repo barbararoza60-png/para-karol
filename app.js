@@ -50,6 +50,7 @@
   $("#closing-signature").textContent = content.closing.signature;
   $("#closing-date").textContent = content.closing.date;
   $("#closing-date").dateTime = "2026-07-24";
+  $("#closing-postscript").textContent = content.closing.postscript;
 
   // Navegación tipo app en celular: una pantalla a la vez.
   const mobileViewport = window.matchMedia("(max-width: 759px)");
