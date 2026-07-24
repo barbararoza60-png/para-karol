@@ -1778,30 +1778,31 @@ h3 {
 }
 
 .letter-dialog {
-  width: min(680px, calc(100% - 1.2rem));
-  max-height: calc(100dvh - 1.2rem);
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid rgba(169, 81, 67, 0.13);
-  border-radius: var(--radius-md);
+  border: 0;
+  border-radius: 0;
   color: var(--ink);
   background: #fffaf1;
-  box-shadow: 0 20px 55px rgba(132, 60, 51, 0.16);
+  box-shadow: none;
 }
 
 .letter-dialog::backdrop {
-  background:
-    radial-gradient(circle at 88% 12%, rgba(201, 151, 167, 0.2), transparent 12rem),
-    radial-gradient(circle at 7% 90%, rgba(125, 146, 120, 0.14), transparent 14rem),
-    rgba(255, 250, 243, 0.96);
-  backdrop-filter: blur(3px);
+  background: #fffaf1;
 }
 
 .letter-dialog article {
   position: relative;
   display: grid;
   width: 100%;
+  min-height: 100dvh;
   gap: 1.2rem;
   padding: clamp(1.35rem, 5vw, 3rem);
   overflow: hidden;
@@ -1818,17 +1819,6 @@ h3 {
       rgba(125, 146, 120, 0.13) 31px 32px
     ),
     #fffaf1;
-}
-
-.letter-dialog article::before {
-  position: absolute;
-  top: -45px;
-  right: -48px;
-  width: 140px;
-  height: 140px;
-  border: 2px solid rgba(201, 151, 167, 0.22);
-  border-radius: 50%;
-  content: "";
 }
 
 .letter-dialog .dialog-header,
@@ -2289,6 +2279,39 @@ h3 {
     text-decoration: none;
   }
 
+  .gift-menu-card:nth-child(-n + 2) {
+    border-color: rgba(169, 81, 67, 0.14);
+    background:
+      radial-gradient(circle at 92% 10%, rgba(255, 255, 255, 0.58), transparent 4rem),
+      linear-gradient(140deg, #fae9e8, #eebfc8);
+  }
+
+  .gift-menu-card:nth-child(n + 3):nth-child(-n + 4) {
+    border-color: rgba(82, 104, 79, 0.16);
+    background:
+      radial-gradient(circle at 92% 10%, rgba(255, 255, 255, 0.56), transparent 4rem),
+      linear-gradient(140deg, #edf3e9, #c9ddc5);
+  }
+
+  .gift-menu-card:nth-child(n + 5) {
+    border-color: rgba(159, 108, 53, 0.15);
+    background:
+      radial-gradient(circle at 92% 10%, rgba(255, 255, 255, 0.6), transparent 4rem),
+      linear-gradient(140deg, #fff0dc, #efcf9d);
+  }
+
+  .gift-menu-card:nth-child(-n + 2) > span {
+    color: #91473d;
+  }
+
+  .gift-menu-card:nth-child(n + 3):nth-child(-n + 4) > span {
+    color: #52684f;
+  }
+
+  .gift-menu-card:nth-child(n + 5) > span {
+    color: #79552d;
+  }
+
   .gift-menu-card > span {
     position: absolute;
     top: 0.55rem;
@@ -2301,6 +2324,7 @@ h3 {
 
   .gift-menu-card strong {
     padding-right: 1rem;
+    color: var(--ink);
     font-family: var(--serif);
     font-size: 1.05rem;
     line-height: 1.15;
@@ -2308,7 +2332,7 @@ h3 {
 
   .gift-menu-card small {
     margin-top: 0.35rem;
-    color: var(--muted);
+    color: #594b46;
     font-size: 0.72rem;
     line-height: 1.25;
   }
@@ -2518,6 +2542,10 @@ h3 {
 
   .hero {
     grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.7fr);
+  }
+
+  .letter-dialog article {
+    padding-inline: max(3rem, calc((100vw - 760px) / 2));
   }
 
   .hero-copy h1 {
