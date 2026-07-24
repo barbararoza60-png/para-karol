@@ -55,10 +55,27 @@
   // Navegación tipo app en celular: una pantalla a la vez.
   const mobileViewport = window.matchMedia("(max-width: 759px)");
   const mobileViews = $$("#contenido > section");
+  const mobileScroller = $("#contenido");
   const mobileViewIds = new Set(mobileViews.map((view) => view.id));
   const mobileBack = $("#mobile-back");
   const mobileBackLabel = $("#mobile-back-label");
   let currentMobileView = "inicio";
+
+  function syncMobileAppHeight() {
+    if (!mobileViewport.matches) {
+      document.documentElement.style.removeProperty("--mobile-app-height");
+      return;
+    }
+
+    const visibleHeight = Math.max(
+      320,
+      Math.round(window.visualViewport?.height || window.innerHeight)
+    );
+    document.documentElement.style.setProperty(
+      "--mobile-app-height",
+      `${visibleHeight}px`
+    );
+  }
 
   function viewFromHash() {
     const requested = location.hash.replace("#", "");
@@ -68,6 +85,7 @@
   function renderMobileView(viewId = viewFromHash()) {
     if (!mobileViewport.matches) {
       document.body.classList.remove("mobile-view-mode");
+      syncMobileAppHeight();
       mobileViews.forEach((view) => {
         view.classList.remove("is-active-view");
         view.removeAttribute("aria-hidden");
@@ -78,13 +96,14 @@
 
     const nextView = mobileViewIds.has(viewId) ? viewId : "inicio";
     currentMobileView = nextView;
+    syncMobileAppHeight();
     document.body.classList.add("mobile-view-mode");
     mobileViews.forEach((view) => {
       const isActive = view.id === nextView;
       view.classList.toggle("is-active-view", isActive);
       view.setAttribute("aria-hidden", String(!isActive));
     });
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    mobileScroller.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
     mobileBack.hidden = nextView === "inicio";
     mobileBackLabel.textContent = nextView === "menu-regalo" ? "Volver al inicio" : "Volver al menú";
@@ -128,6 +147,10 @@
   } else {
     mobileViewport.addListener(() => renderMobileView(viewFromHash()));
   }
+  window.addEventListener("resize", syncMobileAppHeight, { passive: true });
+  window.visualViewport?.addEventListener("resize", syncMobileAppHeight, {
+    passive: true
+  });
   renderMobileView(location.hash ? viewFromHash() : "inicio");
 
   // Apariciones suaves al hacer scroll

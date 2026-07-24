@@ -2388,9 +2388,19 @@ h3 {
 }
 
 @media (max-width: 759px) {
+  html {
+    overflow: hidden;
+    overscroll-behavior: none;
+    scroll-behavior: auto;
+  }
+
   body.mobile-view-mode {
-    overflow-x: hidden;
-    overflow-y: auto;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: var(--mobile-app-height, 100vh);
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body.mobile-view-mode .site-header {
@@ -2420,7 +2430,18 @@ h3 {
   }
 
   body.mobile-view-mode #contenido {
-    padding-top: 64px;
+    position: fixed;
+    top: 64px;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: calc(var(--mobile-app-height, 100vh) - 64px);
+    padding-top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   body.mobile-view-mode #contenido > section {
