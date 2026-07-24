@@ -265,6 +265,168 @@ window.KAROL_CONTENT = {
     "Transmitiendo desde el balcón con un informe urgente y algunas gotitas dramáticas.",
     "Después de la lluvia: plumitas despeinadas, mirada seria y cero arrepentimientos."
   ],
+  galleryAlterEgos: [
+    {
+      label: "EVIL LIMA",
+      message: "No me mires, humana. Estoy calculando cosas.",
+      color: "#3d263f",
+      accent: "#ed6678",
+      ink: "#fff2ed",
+      filter: "contrast(1.2) saturate(0.78) hue-rotate(326deg)"
+    },
+    {
+      label: "LIMA FELIZ",
+      message: "Te quiero, humana. Pero no te acostumbres a que lo diga.",
+      color: "#f6d889",
+      accent: "#e98958",
+      ink: "#5a382f",
+      filter: "brightness(1.08) saturate(1.24)"
+    },
+    {
+      label: "LIMA SOSPECHOSA",
+      message: "¿Y vos por qué tocaste la pantalla? Declarate.",
+      color: "#667665",
+      accent: "#d9c28e",
+      ink: "#fff8e9",
+      filter: "contrast(1.14) saturate(0.82) sepia(0.16)"
+    },
+    {
+      label: "LIMA DORMIDA",
+      message: "Cinco minutos más y después superviso.",
+      color: "#a99ab9",
+      accent: "#ead7dd",
+      ink: "#392f46",
+      filter: "brightness(0.94) saturate(0.78)"
+    },
+    {
+      label: "LIMA HAMBRIENTA",
+      message: "Esta interacción cuesta tres semillas. Gracias.",
+      color: "#bd694e",
+      accent: "#f3c871",
+      ink: "#fff6df",
+      filter: "contrast(1.08) saturate(1.3)"
+    },
+    {
+      label: "LIMA JEFA",
+      message: "Silencio. La supervisora general está pensando.",
+      color: "#325f61",
+      accent: "#efb970",
+      ink: "#f5fff9",
+      filter: "contrast(1.16) saturate(0.92)"
+    },
+    {
+      label: "LIMA MIMOSA",
+      message: "Te extrañé, humana. Vení a tocarme la patita.",
+      color: "#dfafb7",
+      accent: "#9c5363",
+      ink: "#512f3a",
+      filter: "brightness(1.06) saturate(1.08)"
+    },
+    {
+      label: "LIMA DRAMÁTICA",
+      message: "Todo es terrible. Igual estoy divina.",
+      color: "#59465f",
+      accent: "#df9ba9",
+      ink: "#fff1f3",
+      filter: "contrast(1.22) saturate(0.92)"
+    },
+    {
+      label: "LIMA CAOS",
+      message: "No rompí nada. Y si rompí algo, ya estaba así.",
+      color: "#7c8e55",
+      accent: "#f0a85e",
+      ink: "#fffbe8",
+      filter: "contrast(1.1) saturate(1.35) hue-rotate(8deg)"
+    },
+    {
+      label: "LIMA ZEN",
+      message: "Pío, respiro, pío. Problema resuelto.",
+      color: "#8bb3a2",
+      accent: "#f3e4b7",
+      ink: "#27483f",
+      filter: "brightness(1.04) saturate(0.82)"
+    },
+    {
+      label: "LIMA DETECTIVE",
+      message: "La paloma sabe demasiado. Caso abierto.",
+      color: "#665a4b",
+      accent: "#d4aa67",
+      ink: "#fff6df",
+      filter: "sepia(0.3) contrast(1.18) saturate(0.8)"
+    },
+    {
+      label: "LIMA DIVA",
+      message: "Mi mejor ángulo es todos. Siguiente pregunta.",
+      color: "#b06e91",
+      accent: "#f3c8d7",
+      ink: "#fff3f8",
+      filter: "brightness(1.08) saturate(1.22) contrast(1.06)"
+    },
+    {
+      label: "BABY LIMA",
+      message: "Soy chiquita. Necesito atención inmediatamente.",
+      color: "#b8d3b2",
+      accent: "#f6d2a6",
+      ink: "#36503a",
+      filter: "brightness(1.12) saturate(0.92)"
+    },
+    {
+      label: "LIMA OFENDIDA",
+      message: "Hoy no atiendo consultas. Dejá las semillas y retirate.",
+      color: "#824c4f",
+      accent: "#dda27c",
+      ink: "#fff3e8",
+      filter: "contrast(1.18) saturate(0.86)"
+    },
+    {
+      label: "LIMA CIENTÍFICA",
+      message: "El proyecto palomapornis avanza según lo previsto.",
+      color: "#47747c",
+      accent: "#b8dde0",
+      ink: "#efffff",
+      filter: "contrast(1.08) saturate(0.76) hue-rotate(12deg)"
+    },
+    {
+      label: "LIMA DE FIESTA",
+      message: "Subí el volumen, humana. Hoy se grita.",
+      color: "#d57b53",
+      accent: "#f5d66f",
+      ink: "#4e3029",
+      filter: "brightness(1.08) saturate(1.42)"
+    },
+    {
+      label: "LIMA ENAMORADA",
+      message: "Te quiero un montón montonazo, mamá humana.",
+      color: "#c87887",
+      accent: "#ffd2d7",
+      ink: "#fff8f3",
+      filter: "brightness(1.08) saturate(1.12)"
+    },
+    {
+      label: "LIMA DUENDE",
+      message: "Son las tres de la mañana y tengo ideas.",
+      color: "#425d3d",
+      accent: "#bdcf6c",
+      ink: "#f5ffe8",
+      filter: "contrast(1.22) saturate(1.18) hue-rotate(18deg)"
+    },
+    {
+      label: "LIMA VALIENTE",
+      message: "No tengo miedo. Tengo volumen.",
+      color: "#b25b3d",
+      accent: "#f4ba67",
+      ink: "#fff6e8",
+      filter: "contrast(1.14) saturate(1.32)"
+    },
+    {
+      label: "LIMA DESDE CASA",
+      message: "Desde acá te mando un pío que cruza el mapa entero.",
+      color: "#6f8f86",
+      accent: "#f0c0a0",
+      ink: "#f8fffb",
+      filter: "brightness(1.05) saturate(0.96)"
+    }
+  ],
   galleryExtraCaption: "Lima mandando el boletín número {n}: todo en orden, pero se aceptan mimos.",
 
   closing: {

@@ -768,6 +768,7 @@
 
   // Galería: descubre 1.jpg, 2.jpg... hasta el primer número que falte.
   const galleryImage = $("#gallery-image");
+  const galleryMood = $("#gallery-mood");
   const galleryCaption = $("#gallery-caption");
   const galleryCounter = $("#gallery-counter");
   const galleryPolaroid = $("#gallery-polaroid");
@@ -782,6 +783,8 @@
   let galleryEffectDeck = [];
   let lastGalleryEffect = -1;
   let galleryEffectRun = 0;
+  let galleryVersionRun = 0;
+  const galleryAlteredImages = new Set();
 
   const galleryEffects = [
     { className: "is-flapping", status: "Frrr, frrr: Lima mandó un aleteo internacional." },
@@ -805,6 +808,37 @@
 
   function extraGalleryCaption(number) {
     return content.galleryExtraCaption.replace("{n}", number);
+  }
+
+  function normalGalleryCaption(imageIndex) {
+    return content.galleryCaptions[imageIndex] || extraGalleryCaption(imageIndex + 1);
+  }
+
+  function applyGalleryVersion(imageIndex) {
+    const alterEgo = content.galleryAlterEgos?.[imageIndex];
+    const isAltered = Boolean(alterEgo && galleryAlteredImages.has(imageIndex));
+
+    galleryPolaroid.classList.toggle("is-altered", isAltered);
+    if (!isAltered) {
+      galleryPolaroid.style.removeProperty("--lima-alt-color");
+      galleryPolaroid.style.removeProperty("--lima-alt-accent");
+      galleryPolaroid.style.removeProperty("--lima-alt-ink");
+      galleryPolaroid.style.removeProperty("--lima-alt-filter");
+      galleryMood.hidden = true;
+      galleryMood.textContent = "";
+      galleryCaption.textContent = normalGalleryCaption(imageIndex);
+      galleryImage.alt = `Lima, el pajarito de la familia, en la foto ${imageIndex + 1}`;
+      return;
+    }
+
+    galleryPolaroid.style.setProperty("--lima-alt-color", alterEgo.color);
+    galleryPolaroid.style.setProperty("--lima-alt-accent", alterEgo.accent);
+    galleryPolaroid.style.setProperty("--lima-alt-ink", alterEgo.ink);
+    galleryPolaroid.style.setProperty("--lima-alt-filter", alterEgo.filter);
+    galleryMood.hidden = false;
+    galleryMood.textContent = alterEgo.label;
+    galleryCaption.textContent = `“${alterEgo.message}”`;
+    galleryImage.alt = `Lima en su versión ${alterEgo.label.toLowerCase()}, foto ${imageIndex + 1}`;
   }
 
   function shuffleGallery(count) {
@@ -851,15 +885,28 @@
 
   function playGalleryEffect() {
     if (reducedMotion) {
-      galleryFlapStatus.textContent = "Lima recibió el toque y respondió: pío pío.";
+      const imageIndex = galleryOrder[galleryIndex] ?? galleryIndex;
+      const alterEgo = content.galleryAlterEgos?.[imageIndex];
+      if (alterEgo) {
+        if (galleryAlteredImages.has(imageIndex)) {
+          galleryAlteredImages.delete(imageIndex);
+        } else {
+          galleryAlteredImages.add(imageIndex);
+        }
+        applyGalleryVersion(imageIndex);
+      }
+      galleryFlapStatus.textContent = "Lima recibió el toque y cambió de versión: pío pío.";
       window.setTimeout(() => {
         galleryFlapStatus.textContent = "";
       }, 1200);
       return;
     }
 
+    galleryVersionRun += 1;
+    galleryPolaroid.classList.remove("is-version-fading");
     const effect = nextGalleryEffect();
     const effectRun = ++galleryEffectRun;
+    const imageIndex = galleryOrder[galleryIndex] ?? galleryIndex;
     galleryPolaroid.classList.remove(...galleryEffectClasses);
     void galleryPolaroid.offsetWidth;
     galleryPolaroid.classList.add(effect.className);
@@ -870,10 +917,48 @@
       () => {
         if (effectRun !== galleryEffectRun) return;
         galleryPolaroid.classList.remove(effect.className);
-        galleryFlapStatus.textContent = "";
+        transitionGalleryVersion(imageIndex);
       },
       { once: true }
     );
+  }
+
+  function transitionGalleryVersion(imageIndex) {
+    const alterEgo = content.galleryAlterEgos?.[imageIndex];
+    const currentImageIndex = galleryOrder[galleryIndex] ?? galleryIndex;
+    if (!alterEgo || currentImageIndex !== imageIndex) {
+      galleryFlapStatus.textContent = "";
+      return;
+    }
+
+    const versionRun = ++galleryVersionRun;
+    const willBeAltered = !galleryAlteredImages.has(imageIndex);
+    galleryPolaroid.classList.add("is-version-fading");
+    galleryFlapStatus.textContent = "Lima está cambiando de versión…";
+
+    window.setTimeout(() => {
+      if (versionRun !== galleryVersionRun) return;
+      if (willBeAltered) {
+        galleryAlteredImages.add(imageIndex);
+      } else {
+        galleryAlteredImages.delete(imageIndex);
+      }
+      applyGalleryVersion(imageIndex);
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (versionRun !== galleryVersionRun) return;
+          galleryPolaroid.classList.remove("is-version-fading");
+          galleryFlapStatus.textContent = willBeAltered
+            ? `${alterEgo.label}: ${alterEgo.message}`
+            : "Lima volvió a su versión oficial de noticiero.";
+        });
+      });
+    }, 560);
+
+    window.setTimeout(() => {
+      if (versionRun === galleryVersionRun) galleryFlapStatus.textContent = "";
+    }, 2900);
   }
 
   function renderGalleryDots() {
@@ -889,12 +974,14 @@
   }
 
   function showGalleryImage(index) {
+    galleryEffectRun += 1;
+    galleryVersionRun += 1;
+    galleryPolaroid.classList.remove(...galleryEffectClasses, "is-version-fading");
     galleryIndex = (index + galleryCount) % galleryCount;
     const imageIndex = galleryOrder[galleryIndex] ?? galleryIndex;
     galleryImage.classList.add("is-loading");
     galleryImage.src = galleryPath(imageIndex);
-    galleryImage.alt = `Lima, el pajarito de la familia, en la foto ${imageIndex + 1}`;
-    galleryCaption.textContent = content.galleryCaptions[imageIndex] || extraGalleryCaption(imageIndex + 1);
+    applyGalleryVersion(imageIndex);
     galleryCounter.textContent = `${galleryIndex + 1} / ${galleryCount}`;
     $$(".gallery-dot", galleryDots).forEach((dot, dotIndex) => {
       dot.classList.toggle("is-active", dotIndex === galleryIndex);
