@@ -1972,7 +1972,13 @@ h3 {
   width: 9px;
   height: 17px;
   border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(70 47 38 / 14%);
+  will-change: transform;
   animation: confetti-fall var(--fall-time) cubic-bezier(0.15, 0.75, 0.35, 1) forwards;
+}
+
+.confetti-piece.is-settled {
+  will-change: auto;
 }
 
 .sky-motif {
@@ -2056,7 +2062,20 @@ h3 {
 
 @keyframes confetti-fall {
   0% { transform: translate3d(0, -20px, 0) rotate(0); opacity: 1; }
-  100% { transform: translate3d(var(--drift), 110vh, 0) rotate(var(--spin)); opacity: 0.9; }
+  87% {
+    transform: translate3d(var(--drift), var(--landing), 0) rotate(var(--spin));
+    opacity: 1;
+  }
+  94% {
+    transform:
+      translate3d(calc(var(--drift) - 5px), calc(var(--landing) - 10px), 0)
+      rotate(calc(var(--spin) + 16deg));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift), var(--landing), 0) rotate(var(--spin));
+    opacity: 1;
+  }
 }
 
 @keyframes jar-pop {
